@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadinhop Edson</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Cabeçalho e menu */
+        header {
+            background-image: url("https://img.freepik.com/vetores-premium/fundo-abstrato-laranja_42634-49.jpg");
+            padding: 20px;
+            color: black;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+         
+            
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF5A00;
+        }
+
+        /* Barra de pesquisa */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FF5A00;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Estilo de categorias */
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .category {
+            margin: 0 10px;
+            color: #FF5A00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category:hover {
+            text-decoration: underline;
+        }
+
+        /* Resultados de pesquisa e produtos */
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .product {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product button {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Carrinho */
+        #cart {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #cart h2 {
+            color: #FF5A00;
+            margin-bottom: 10px;
+        }
+
+        #cart button {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img   style=" float: left ; justify-content: space-between; padding-bottom: 10px; padding-top: 0% ; " width="200" height="72" src="https://u1.padletusercontent.com/uploads/padlet-uploads/933833254/3809e7f1eb861e488043ad0215293231/MERCADINHO_EDSON.png?token=_siI4-0qIuaG7Br3OeW4tDSftcnfUhFg1A5NweFgucHLE-JfsKvk46i5NX8FrTZqT05DxqHPcDXmNGvc1RffU_rTEX4MuACAXYIHC6FcdrFtLy6sk_5zkwVIaCSsvWWFqUNsWfM1JO4w4ReNimKmueeiaTwB2soR-GRwvLAXCirqMvNn_2UNbT7ZMWhiiu2c_sZI_4bjOjRzESibvh6vId071urW4ogxcc2obOOIEtCSAlHXY2Yma9A_t3y8u2e6">
+        <h1 style="margin-right: 10%;" >Mercadinho Edson</h1>
+        <p style="margin-right: 10%;" >Bem-vindo à nossa loja online de materiais de construção!</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="index.html">Início</a>
+        <a href="congelados.html">Frios</a>
+      
+        <a href="higiene.html">Higiene</a>
+        <a href="alimentos.html">Alimentos</a>
+        
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produto...">
+        <button onclick="searchProduct()">Pesquisar</button>
+    </div>
+
+   
+
+    <div id="searchResults"></div>
+
+    <div id="cart">
+        <h2>Carrinho de Compras</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> <span id="totalPrice">R$ 0,00</span></p>
+        <button onclick="checkout()">Finalizar Compra no WhatsApp</button>
+    </div>
+
+    <script>
+        const produtos = [
+            { nome: "Desoldorante Rexona F", categoria: "higiene", preco: "13.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/67a85c21a932ee29f03b102d4817a084/rexona_F.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAifUUgeYPH6s-VG3jOiW5nTQH-fNhqtzQM3pYpHa1yAy0n3gNpws_FfOg7thPisQ_o9dRDxGIFnRtfIs56r7TjRqSBKpPv3xKSv2mOcY1qKJNszzUEfQ51IS6IKg2CEoT" },
+            { nome: "Desoldorante Rexona Bamboo", categoria: "higiene", preco: "13.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0fcb31280084b4e219ec51d735abdf47/Design_sem_nome__16_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAhTJ1u1FtA2eIpyKx6sKuPLnjfyY_e-zOT8hGU-6z3Tpf5RQAeEZi90qRQZHn-y1LOFDeRXNN1J9D8PxiyLMGGtHygpVir6F3EJHG6K2Vx40K4Pku0z4njPnRYB8cTfXL" },
+            { nome: "Desoldorante Rexona Erva doce", categoria: "higiene", preco: "13.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/d50795d27369cdfbbdb50446aa9a1eab/Design_sem_nome__17_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAF4RlVbfBp88ZEEnNMyqKx2KQhjUKfg5GmHZ9_3DwsnzaaRm3zUT0iSzG8nRksVkGu0M4Dr9xWIZOnd6WQWo1pMkWMhHXAcXn2F0ZrjB81AkaW24lVdmeH-eW49YL2bSX" },          
+            { nome: "Desoldorante Dove men + care limão + salivia", categoria: "higiene", preco: "15.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/632ce62e2678c152c8e5d2ba1669ed85/Design_sem_nome__19_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA4vL2MAEaPPhe2FL3v8n4IIHdNRw2uVGbQ2urxezS7X-jttq7oFwp13DvSLQqA3rW2j5Irb_5lzfwFZ8znG6JD-9gOD8y5xPd87Ho0mVgZEqT7KnG7qzhGU-g91ils9l1" },
+            { nome: "Desoldorante Dove men + care Sport fresh", categoria: "higiene", preco: "15.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/fb8f76a0cb4c913bc98aaf7b0dd23855/Design_sem_nome__18_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA-zG_OH0ZHRnoOG_zSSy-eJgg0_GN7014JEsVp_Lo3kM-iJCl41_VQBwAy4OnPOTqc0fRtMtJJ4R9wXVz8PfkAV-4N_CHKDVrffWY35tJTRsGB0eRCp2pW_DZ4CegMA_R" },
+            { nome: "Desoldorante Dove Beauty Finis", categoria: "higiene", preco: "15.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2ee4baaec319ac2e142005eb0d27ec56/Design_sem_nome__21_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAjYEnQOr9ftLQOo5qr3HcPH7guP0R9UkRnNoM5tGvCblWTuunJpUEqNP4Fd5DpfClg20yJ-PbEZXAZdpGRHLambi93WuXCzixyomy6hyg3x-qE9kuCsBJVZNiVPQAyfu2" },
+            { nome: "Desoldorante Dove Go Fresh", categoria: "higiene", preco: "15.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/85c3ba53b245d4dd73211c0c9c9ab0c4/Design_sem_nome__24_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAoIrG_LMK2dc3hxdZ37MZrNlErPP2Eq839rLs2K7J-ZohfgKHKbz769RSY1lj9671uRDf_eNICpDal3sU9jQonFe6iC7F0e3yxQzoQwD72UAqnCGjwbotEozo9aCvJZ6G" },
+            { nome: "Desoldorante Dove coco", categoria: "higiene", preco: "15.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/9284d39aa6e5b53568911ac84f4a8109/Design_sem_nome__23_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA1z9qX4nXp6QqHYAS8PDHTdZFEse9z5BH1BWc8yGn6MCKW9pY2-_QpogFQFo_1VSRJCP55kEswt0IG18kMq97kM5H00vbShDfCvFYTe3yxzJKIs860KKubziKWDwG5aKw" },
+            { nome: "Desoldorante Dove original", categoria: "higiene", preco: "15.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1d3d7b240afb2f97dc48263d9ad549c2/Design_sem_nome__22_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAFW4NeFEQP9CJ-uu70o6iiDDkNYWLOYABTH9-NWS2S5g9IXq4q7n17fRGqdl45WWMvqzGNzTGqkQeAtoq4oegiJZ7Pi39PN-K7WHdaRoAwPC0DinM3XzqUcPWbOSqCWBx" },
+            { nome: "Desoldorante Monange Detox Fresh", categoria: "higiene", preco: "9.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4c4d3acf91dad0bfca9ad5c329652c11/Design_sem_nome__25_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAh1OfIg9CtkX_xlHCIedYn9I-77B20mJRCQ3kuCMRC_bS-XI_44CHGheTeRhcH1ZryklVt7igBs8MqF6vdMWeZyVuknp-zXQ37UUB9Xa-JhG0j4XbluIDHVwZ-NDd5RH_" },
+            { nome: "Desoldorante Monange Sensivel", categoria: "higiene", preco: "9.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cb0b7e79732710af67e02fdc50cc5eac/Design_sem_nome__28_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA4bEycJwx7I14iqI2TQFmZakN4IvWClSIO4fSt9d-Eyr7zT3DABTHzhXyP7gK4u1Tg2nqAkS8eic-smwB54-uRfwsEjQtN84TqwnD_OiT_qTC6y1E8akV4DrTn3lxtQM_" },
+            { nome: "Desoldorante Monange Frutas Vermelhas", categoria: "higiene", preco: "9.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b03b0988611be837986cc7a5470bd709/Design_sem_nome__27_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAracA6DVpIfZA2rWzc6twQjFFdROgQisYyeSeBl_H4u-qw8X_s7Dap3p-37BeBNY2BiModVb9_UUj9RcL61I8Y5U1ZjtGADv20lryre7S7JauYyRzYqZ9s1iHCYDt4TNY" },
+            { nome: "Desoldorante Monange Flor de Lavanda", categoria: "higiene", preco: "9.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f0fdb92b889de1d7e0bed1712d1a8575/Design_sem_nome__26_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAM6N-yzpHYUKvBepB4-s9l6bdD97Cs-_ddD2CiIodn4KhuW9kkLgSuXw-ZbAkDAEcc3uwULj51RrWNYJtugONHcERX26DQ_nDKMiLOElAfOe5YR64qIBHQddUgk72MWOI" },
+            { nome: "Desoldorante Nivea protect & Care", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2149d414f01bab72388a0623df5e0e75/Design_sem_nome__29_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAZNlUEzPoG5BUfGSrQi_9Hpd7UkxZFkneT5BrLt8PfrE-4i4IIzauGgqvu_vSF1-Ve3oFYXyHwy-4Or8FYC_p2Mezqfx4B7_Tn-FLfxfLjFaMOw97sxoHLPtO8JyQIPJG" },
+            { nome: "Desoldorante Nivea Active Dry impact", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2dd4658f72786b483363021835393f09/Design_sem_nome__30_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAm9ioMTfHxLXVeWMzCycpmoRCjr4EPmI_K2Z1V9blS4i9bGbc7M9BnNoAiC-d3mnozvbfNW-hRFIYvoJ0z5K_O6SdZ-O9Pa3mgG0MX736UT6EnQ_RFrEb9hdIDI9euVM5" },
+            { nome: "Desoldorante Nivea Black & White invisible clear", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/88ee9d721a6671c9b7fca424a2bd2543/Design_sem_nome__31_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA2d4BhjgRdYubEIhnXilIcRYlPzqWvMJA2pVO4x9xq0DZoxSUv9dENymjTb_F3ahC8ssL6VBGlcpRkjB9DigLzdG7g14Y8WIfGeaWfHydxnxclF-jynpp0mmK3-k_PeOL" },
+            { nome: "Desoldorante Nivea Black & White invisible  fresh erva doce ", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/9c8682027e4eb0bb76604a545e99b229/Design_sem_nome__32_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA_2VbXyB7o9Jb6cXW2-HLRaZoa6y6Gp7R0yGBDBZEf8ngRx5c4DuwfRmQWAg8qx_PX4Fra9Gwv9HVVVG4op93HvSBwt7o3sDwC4hOkQjabfOOkAVCHEAW6KB1kScKDljr" },
+            { nome: "Desoldorante Nivea peral & beauty", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c359e4662d974eaedf9f9b092b060868/Design_sem_nome__33_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAyMnx8_oDxe7ztJ0h3AmuALEPkfflMtjANIY5jevSDyaFBQzSvkyRlzqce4pw0mPkQejRjBiGOkpYS2gLOzwBBLdm9DtwytuwnN4XjT1_C-GIWTmIogkLf16846GXLnLw" },
+            { nome: "Desoldorante Nivea Black & White invisible 5x anti", categoria: "higiene", preco: "14.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/15a5d517dca952921adea966c3a490e4/Design_sem_nome__34_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAWpdvViztgj8ClEZ2f0uKqyY9B33TJntbTBbes7WaHBOzMwbry7b9PBMLh5-oaCuVvjKYYYCjCmZMnbyUhaLNuDKLYKA57HyPpSgCheRRA31ps5TvVlDqsPVG19ynxCX7" },
+            { nome: "Sabonete Protex suave", categoria: "igiene", preco: "6.69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/66cad63a1015db41586af2e4d84f105a/Design_sem_nome__4_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAY86XoSHfaNoO9zu53htER5qRFcb35Au8Lr6CTFqGokLwPPUA6GTq8TWs5-f-wB1_v8OAmAWnStwotX-tFBb5jNyPhM17FINpn9o0Xpz4ZMxqUvuA3g8Ote4F3B2zl0-C" },
+            { nome: "Sabonete Protex balance saudavel", categoria: "igiene", preco: "3.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/46137755a6fd8c3b2d1da9c94852dfc7/Design_sem_nome__1_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ1jiCL4OFIuxKaLj1mT4_y6hvDuw__EJdci4JmRG6rJ6nmakxLtGT1Z4yn0fNZeHEvJLds0vzBInfH578xkEddxm-Ulx23nnKoDaU20dCxO4aOoSAYkE_NZMMY__0-qGshQEXvMpV_ehdDItk3JGdtI=" },
+            { nome: "Sabonete Protex cream", categoria: "igiene", preco: "3.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/48223aa6def27769f8b43a749b9a786f/Design_sem_nome__2_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ4GRfB2cHlGcIZ2gB4KG52rLMStRkRpfK6Vq8gTzhakKYlPd3Z2SZUohPwUn97MtDbiZSJFUXPxmD29Ur8uoSfkTCUUsOFPzHdVCyJJSPAi_XPQewA7hp9KYliSu36DQ_GVQBkp1Bd8AY3x6H4_DtJE=" },
+            { nome: "Sabonete Protex aleo", categoria: "igiene", preco: "3.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2f4a831001a12fc56f1a3fb6f5f81704/Design_sem_nome__5_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ985uCWRGMud4Z0823LCJ44qTrZ_mvX_OdqMc13-aX-8njmS9YrcmB_DGQEp-7yAeTaTPZk5L8-71SStX6UPqeuim4-dVfmoZMRu7UeAFzIpa6ZwFMkK80xkSpxQh0DmnxSCqVGbT5-2stE6zrjywl4=" },
+            { nome: "Sabonete Protex linpesa profunda", categoria: "igiene", preco: "3.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/38878597bfe798d8ee9ab84b31b42be2/Design_sem_nome__6_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAC_OMp2vgJKlXAaX1mNsZ-DVhWQlkEXKeYOUQipy93oqqyIwkoMfpihWia2M3fV6kKIBvc2jvMWBWTDMoOfD9J-EVnM-8ETjlRE_N6mu7TCKHIuF4XGnt4-Q9-7DiHOD3" },
+            { nome: "Sabonete Protex dou protect", categoria: "igiene", preco: "3.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/a2ebecd3d1b841a6b3b40283a701179e/Design_sem_nome__21_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAEj8jr1XvaoCGcmvwNLsXbIyT5LkKhJbudPhNGYKO6oVNgpU14gEoKCNabTbfMY0kXkbINTl4c1tv1BvSnN9fHHRdW47zippNYkRvCQXZjqeMhQ2e9sSabwGnvIJmcA0n" },
+            { nome: "Sabonete Even Men", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2f9bff532948df41aa37e62af061b77a/Design_sem_nome__8_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA4kRNxUL2NHGrSuRyehJ2Agp5_Zo5CTM56lLuYu_JdUoppRTNhGr9Ao5P33Gm608yri5simWXkOc-qAHfvVeC88dzCXM7TWcJ1Dep2K_swuJ-JI2Xe7__NlxyCsym91jM" },
+            { nome: "Sabonete Even Aleo vera e menta", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/684c4e5d9e3064796458df8a9875d79a/Design_sem_nome__22_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIATEOwTV5RMIpdAP7TWR9rC4EbxEnqEcDbBdJM-2DBGGDpP_C23ouJtnz73vlLCiQauFio_Liqin5PZcZfI_KxMTn2HEM_ppS_s2nUxWVwzu5nFCA5acgXqb57swUZX3j3" },
+            { nome: "Sabonete Even flores e buriti", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3198c120d591a447171b180655398882/Design_sem_nome__23_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIADNRX4_GeGDPU4t94hVtQYnN6Vms16lTwoIE6lPcCYY9j7U5eML212OhEBKCwpjP2aTPdkC-eVd5j4ipXgPrktOTwp6mZoDtk2icr7LBG9eL9z4N01bgYB-eX0DJ8k4d_" },
+            { nome: "Sabonete even campos de lavanda", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f1940b5b626326b5de16641ab88bf717/Design_sem_nome__10_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAxS-qa95cb4FlRVsRW1VRjhycGcqZ4x0Dk9JQi4NykT-psT8RbjuhweN0OD98F-EV5g2XNp9JgMyLmrLaiCDE0WXC654JpinKUzgwRS3wyuNDT9l50-S5XeVfiZ12oeDX" },
+            { nome: "Sabonete Francis enegia", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/536462486f039e985ccd072733e8de9f/Design_sem_nome__12_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ28wZmdqZKMNXlCwMdJR5AfKUwR3fvjmPLw4mZt82s9nlz3LqCCZmfUxT5QAyH3nnlLCkuncpzVQjQ3YBfiYk6Q_q3eJa9AuDJpJ8107OfH5079990AuEdihWRcjgonL75CmcPLtWDg8LGl7wXVn5-Q=" },
+            { nome: "Sabonete francis sedução", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/333ad072b8491f8dda2436796a20d958/Design_sem_nome__20_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZyib4TEhJRMiT8PYuPMFV-qFh_vLwSKGKesTHMrAG41eRQJ6Zq9jcbxzx9ByQ23oLGu9xjCQ_MSwgKHICr4Ycne52tLTkr2OCDu28QDbnxmqGPbC9rQx0gDfoLB3e9twCRzRYaKFhrUMO459C0IwLQc=" },
+            { nome: "Sabonete equilibrio", categoria: "igiene", preco: "2.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0daf0f765f36c044a9a27cc77aa43c9f/Design_sem_nome__11_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ2QWzOikaFGbdSP5cuinX1ZSlGmJh_hG0m5RSDtk0swwcyVMQ1C1prhAc7QKrxJHhQtCR8BPvP8vn4q7z1tiYNsHRLB1h9x1wAW79qdLtCfM9G3w5BVgD6cDXV4v-CVu2W-NYZ3sJhHxj5uZa29PPqw=" },
+            { nome: "Sabonete Lux lirio azul", categoria: "igiene", preco: "2.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/eefb85713a27a8daa2afc2de3a16714f/Design_sem_nome__13_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA5_o33ZmknFgxksj9GPGtYeOwupDwLLVmICOu1ZhwBtTrjLQa7EDf8icGci2fkwoSAuI338CldYMURoaQs0Pyj8PkTzHh7GDD9bsd5far3AMkzhi50rmoZaUZQSQoiUey" },
+            { nome: "Sabonete Lux lavanda", categoria: "igiene", preco: "2.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/53933479e530b008d90774d16a4a1c07/Design_sem_nome__14_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ0DoKkha-nS5roAb8aIb2CA8Lf7PYELIzWFjoYQmTslRv2N-oRJxBR2nGiqqO7WOzkfHh-U3_gaNSQvgwMnMCWdo-7aoU3BPhjpIRmslPD31smqzBptL9NK_IsM7fwhkiIgJUMaYvvyD0uK9VUOeYWk=" },
+            { nome: "Sabonete Lux rosas francesas", categoria: "igiene", preco: "3.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/d63fca3eff591f01418fbadaa4bca66e/Design_sem_nome__15_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZwqCcFJ617eupHx2x8MYgj-mRozpXfiunjrta3fkZjXCpVGGptBFxt5u0vrvdPduc54cIe9lBEblVCV4Uag_gyQmg6KbIhGOVOuyZtYku7_SOhdmZlfuOD7mVj1VU3aBL1mgrgihYDUD2i_iUImMlTU=" },
+            { nome: "Sabonete Albany perfume da naturesa", categoria: "igiene", preco: "1.65", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/d8b9d7030d4c9f4203af026be0bb9787/Design_sem_nome__16_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ0MWrCmgjriLyelCeU5Ol_bHBzlTNNFclUy0-hYsiSQSIoxXkKoUHqaYxtsC1M78MlzWoJupsr9x0ABQxheW6yqpsfBpZzQiUjQKmsRet8FgAwxUMqE807sOAQ2jtBzR6Va5MCKXaY_f61odKjdPsTc=" },
+            { nome: "Sabonete Albiny ", categoria: "igiene", preco: "1.65", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/dd5dce182b425f74953726fef13f692e/Design_sem_nome__24_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIApQbamqcPZde9c8GyvAxwjQAP2Q38tXlWp_57piaGGdWzGN5cIjQbHTayquhqvVzieIWnkZT1K9F33ftSJ5R13LIGYUCjPlhEJP7FMzV-PJlxhE_0c7_cRErR9DZR8Kia" },
+            { nome: "Sabonete johnson baby original jabó cremoso", categoria: "igiene", preco: "7.79", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e2ddbdd56c00e0b15d2591eb22fdebc0/Design_sem_nome__19_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAUmOQkO_Y4aEYwIMaJ8lifV-X3w5_N5xl-Njmt5mGj1KHoBSLPAlMc6Z2QURV056omAEJUHujFS3Pk9YseGKC5ZNMOR6wvh-jogBu-ivaOV4L-GH4ahw6-wzkCyBhTD5U" },
+            { nome: "Sabonete Nivea creme care ", categoria: "igiene", preco: "4.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/37e4da5a7c5866fdb2cdb7be3af58666/Design_sem_nome__18_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ5ur38E9K6QNG8StgioHY9HUIOq8VHsDdnzWceyqFGMpXJaIF45nwqKXYi8N0MitP0pZXDHA-cDVHukcnOZCXydorpa43g-ZHisB1C1k49Af27Caugs3j4J30eQzlo2EoZTwSWsgvUByW69ygckwYWQ=" },
+            { nome: "Sabonete Nivea pure milk", categoria: "igiene", preco: "4.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/6509f796de7d6197bd56bb4b052206c7/Design_sem_nome__17_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ7n7ZzFftNmk4I2TEfqjqRnPk57cEB5XXpqMFMuUV1YUeNNp3Mza8HiVVPmnjaW00vQfll-CvgIqGfZOyEHXOD5bt29ci6oXxZHrLYFq75xRwQQvKcgTzItTz360EydFOpIHE4ypUuJrdvILr01Q9sE=" },
+            { nome: "Shanpoo seda cachos definidos", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4708f775620bc73fb21d07b15c637fce/Design_sem_nome__25_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ6rXpEr3esocHckzNQ7uI3zb9EEPSIUVNM7vLPTAQLE4Wm-vvCf3ObxLAxmHgK7z93-O472Ge6NJlp---Cs3_jb-ZNVKCkYo4ueXozFKLkTVDqNCRf0KWf4GxM-yMAYBDgCgFjY5JlrzOjCFAlEgd0k=" },
+            { nome: "Shanpoo seda ceramidas", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/fd259100a3d4f47b553cc27c2070afcf/Design_sem_nome__29_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ-0LvqaAYAqgT9lvEap3UWZUGWOJlK7gt4uqAGckDpg_VG8QqDXsrFLiKKQPizRirG-xiMoUhPuaKTxCfkUG7NrvEhOUKnGV7HnhmY0UdoQ0ULwbHa-na5SUXGOuZNE9XAbkL40d-0esdPLyRxhpsoQ=" },
+            { nome: "Shanpoo seda crespoforce", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/603c89437561f1e846fdb57584953a90/Design_sem_nome__28_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ64qgaJPNYyaSG7LQyzSwLNI5P1K4PZFYXI1qR0eYpMATZxx7yF-vKRz4JoSxy_ZNm-OUfbl0fwAHFs33Iu697foJugwDR5rK0MyQaFvcFy6jMwVYXTBi13_FA5jqGA0reia5ZLdGRgsrt0y5x5l6kM=" },
+            { nome: "Shanpoo seda mel e aveia", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b0539b932ca4755784e9d9a1f17406bf/Design_sem_nome__26_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ-sHA8csi-baKntEi7fhH-nwnvhTU_oY78hGpa2FjeE8PC6-nRznDGkP5aNqdPi_iUsT2Ind5QLe09i8QuTau4l-niOX4xzHXqznKG9yXsBlyUyvNa5HVYkRkcZWieLaMpuV-TuekRXagfBhQ3PuD9U=" },
+            { nome: "Shanpoo seda anti caspa", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b14231d0f6c83b8bbb47b2ac26b83f20/Design_sem_nome__31_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ9UIfv-eRjjGamOrG_f7zrPlynT-wJiunpHNizQJLH6fXNld0xpeH3uMOyPHAX1tFLmy6hf9zrspgM7IpKLehrMSVxLVpNG1OhMR4MAeg-aWX_VZKkvFBlJf8VETesUCeYPKImmvpr2ohy2ojnMSDC8=" },
+            { nome: "Shanpoo seda pebiotico boitina", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7901aee57e563dd6a4c0b13f0b16e7cc/Design_sem_nome__32_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ6f0cwGkG-LD9QiKEiQL_onBV1ClrgLUNhcQNWRV-jMOSqq1PPhLaoYHqy6BSV1ytDB2dVBnqYkmwa2GLdUgk3VTeyOaHTsymBHw8dY7Q6usXokInJGI9Xmv1CdI0VmWoLjRLwWrn8QUheO0VF1v1Lw=" },
+            { nome: "Shanpoo seda chá verde e citrico", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4951f8f9775d80deabfb8b9b929b9487/Design_sem_nome__33_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZzwYjPaLCQB3aFzYi3ztdTcvGB45W-nyqZqZxt3DcfqTLUL4uR8-846ZboBu6IFkcqbOkT4ArNCCmNco6Si18g2D6A_VB5f3pvVTKm3pTaRakgtldwtK6w12_ffIgi4Dkp-qfPd3DicrmqxdSHZcMh0=" },
+            { nome: "Shanpoo seda babosa e oleos", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e0e693dd619f3c5789f1d3d299e0a118/Design_sem_nome__36_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAxMykMLXWvKh4rnWxSrM0p-4iR_tVyeAp-1tchFwxlF8Jc-MY1lJqQsmPUXmPdDUuS3TVeMAOgpUyoEtz0ulo-2-cGz31QIFWiiYrjKupSJUKoZixXHoWq1CAiw0x3X8q" },
+            { nome: "Shanpoo seda liso perfeito", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2fba4a8eb963d0c642c63ff28455e684/Design_sem_nome__35_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAiCn71X2vFOtQK7hkv7tQgZVZviVqrZAHL83htSGdOe8-dVm0_0EH7pUwu_nvVIcVHZJPIwTUXt4wd9Ar0wBAY43gDwRd63z3nilCnAUq8LC73DfnZyG4Z_VTi5rL3l6A" },
+            { nome: "Shanpoo seda colageno e vitaminas", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f38d95ae9894f4c42adee97a5527e991/Design_sem_nome__37_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIArHyGz4b0Vm7CkZxg1hzYOvfla84-LBhKSI7qbHtJIDoKpwJfGVMHbo3vE42SuJytzBbfHSyDoFVExbfU3Hx6Q0xExr7VBnvJmGfQwzGGMExVOdGyWW4PapGb75VUkdew" },
+            { nome: "Shanpoo seda oleo hidratação ", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/8c74be6f762710794db3ed067a81cf55/Design_sem_nome__27_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAHqyO1_ghnHbnC6-E9LCWDc6-Ng6FdJAi-Tgz4zDbUE2t50cDFKxggCClg-EcvN9fftLqfYER9XeuC2euyVeJwj2jR8iopt0QG0KyF6ortIBWz5j9hudgdyuOR9k0e6rd" },
+            { nome: "Shanpoo seda preto luminosos ", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/841ef1b307116e45636157d83ce36467/Design_sem_nome__39_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAhf-bCrYm3LLGm-MbxbbxD4VBZoqsMberDrvP3Si15G2xeTIu_dOCVGD-TjFIt54wO2h8JThkk0a3Q_YOn6GA7DWx3Ewz-Dk0InTH3y78OnHpVTIMCTDRZqxDz_q6XEY6" },
+            { nome: "Shanpoo seda hidratação", categoria: "igiene", preco: "11.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/412d620b0c80ecaa9e7311c85308bea3/Design_sem_nome__38_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAmizWiD49rpix1HFvwyhyC01x_KnmZjPR126US49BUTlD6xpuLTETXVtf4Rvuq5cbVVSvNwOmux_H8e5ZnuI4dCIWX4-G9FdGgfOByt8-V83ytdmgzNJQbqqqbM1R3EfX" },
+            { nome: "Condicionador seda colageno e vitaminas", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0ad925d39a9046445a8419c3dcaaff48/Design_sem_nome__40_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAcdu7i0WU6kvkmaprohd53JPaTljvxgP_DVwBn4BlxLcv9upYZNcBgMkniXCwI9I3qaW3MQ4CRg31abF2vzBlNzBmjZSbmQbVnAxfSTczYdiR6_O1GG-1vqTUcKnvihl3" },
+            { nome: "Condicionador seda gengibre", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f3db5ee1f30380fe938f8b55f4a6ce7a/Design_sem_nome__41_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAueS32SoElhYGJ-Kcwe51Jpfq78Z_wYKkgXemnYLS3V7vYIaid8KCtkJj096PI1-0pGsvKAUThiaeVg2OTrJUlichbLpM7XLERhtwtvzxA1KG9lW-eQiSbWG1tdqe-Aih" },
+            { nome: "Condicionador seda michelar hiluronico", categoria: "igiene", preco: "10.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/29b3dec37466632106a305f351a6ba05/Design_sem_nome__42_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA607lKh8P5T6tTK3CN17ngyLuI35aNtpjHc-VorNmMPKOg2PLPLl_faORbpuxTjSG1ghX4t9QXLURJ26NYpgMS-2Ph7LeB3PJi4fsuzd4dy25tR7HPBLprBT_k7U-qlJy" },
+            { nome: "Condicionador seda liso perfeito", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f9cf5c726bdd4630aaac52ac54576304/Design_sem_nome__43_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA0gpvOHZI0yMMIpoSWlkGAEC77lYhnxIuFHKX6pouz_v7nYZku6zQyCfw_99JPBIHE4Uq4ZQu9m0m_eZ4FMoSMLTEfYI0lRRyWwYD1K0-GMoZIU3hAGTnc86y_itMC36A" },
+            { nome: "Condicionador seda prebioticos", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b508e3ab9f518b6b0f3465fd8bc39bef/Design_sem_nome__44_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAE2z1MbOk40Nknnx4uN7zO8lGNQOW5XzDogRxChlhu1sIR8LnxWDCcgzTefaE2yreQ0LsnKvSNvRbfqXo2vs5riF9jLnw7CgiyxfRd95VxgK6dEk29H5k8NbiYobMDUe5" },
+            { nome: "Condicionador seda babosa e oleo", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c010c690dae0167e5e46b98b5eb480de/Design_sem_nome__45_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA2r2wOaL-Q3lfhxhaZ0V9f2jgIVlkbXTXyBb9by-Lm9jlf_7bk4gi91l66iYhQGLiohSwkoNgfvRy-NpQA7kbSFuAGnHd5tYmBn9p5qXScFmFvnra9pppXKzYP6qQe5FS" },
+            { nome: "Condicionador seda cachos definidos", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0efab85adc3b4ed89ab75bfff351508c/Design_sem_nome__46_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIApNrYYYK_nucxj4OYYVx7VY-CfKO5hKu3nM7BqQyH7TehOJ_s6wx8MoecC-C955l7BfgTrYeVoV-Ip1qFjqk0StBMT4io7ceA-Z0bwDrg91LrlOmDA-zaIeJxcOgI_x88" },
+            { nome: "Condicionador seda ceramidas", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1bf6284011314d554f09b9b4ccc14da3/Design_sem_nome__47_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIApgL9N6xn2iiW0sut2btCM7JC_h6k-0YUO_kQn_qJLQeaVXqIcDyHHaXLrOZNRGKkz_kQphpLrOdy7KbXF2A6NKcR5aY_JwBVlJhK2bSWosaPCH-X3sEdAIhmlT14AFYA" },
+            { nome: "Condicionador seda crespo forte", categoria: "igiene", preco: "10,59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/43cf6bfbcdde618cf829d9750a2ad6c0/Design_sem_nome__48_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAU_fYaX1adJeoVOQNi-OXT5sn3aOg58QL-ANha6RTz5-m6kKY3KVHTxyIPLBT3abvdyUVNUR5P-yjkZ1DSbsDON3Z4ByoJ_DelDzFjsntT6lc8v1-DCNs4VoUamMl8BP7" },
+            { nome: "Condicionador seda preto luminosos", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/04bc8e7499b5b9b4e6c064e82140dd75/Design_sem_nome__49_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIArDUmugP62K_oD7pbapN6Ravihplc0OtqmAByx6hfUL2s04TrSYzcpnE9VkWsCb9Vt_7yMtq_uhsn-sy9Bq7FeuspG8APqqtI18Ol0WdUXadY8h1UDBSVqzFQ1iG6mXOa" },
+            { nome: "Condicionador seda oleo de coco", categoria: "igiene", preco: "10.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/83ef1c509d0077836d79c181f9ea227a/Design_sem_nome__50_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAO8juHadHNMmHq6Yp5-adhGF42V7bO-teH5vbHLa9mPBtaHDmd0TxuCTcbQLpS1pz_ZbUxEhQtr3p0rJcZf88tDVPGPqbsacQWvTQS0tVS4RdM_l_dv0EnzDcbwv1VCqh" },
+            { nome: "Hidratante nivea protect & hidrata", categoria: "igiene", preco: "51.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c9c650b0b5083ea152580ff8f32638a7/Design_sem_nome.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA0Rniyp3kKWUmUF2SrUqV53kEsqVuqIhcWoyD3zeG9YU3wfzU51W4QwFTBL9NGjwUNuWhN4E_0wGQYrQawwhske5Of5s7tM5XcCcWiliEPG3VJ42CK8qvSvVjs8cc3Wjp" },
+            { nome: "Papel higienico floral neutro 4 unidades", categoria: "igiene", preco: "3.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/37c9f693203617aac5aa7cfeabdeb6cc/Design_sem_nome__1_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA_vCf_3eslJxXjiJ2VOsrEqK6AGHfsbEAXgRq1tlUWFUEtXfyiFrBrEgPqhnTBfBuyAMhtWo5SmkB3-zOyT0DJLDrvCcTKyyHFrRAuMwTGUMgKYwRwoVsxa_xtXKogG6c" },
+            { nome: "Papel higienico atualle 12 unidades ", categoria: "igiene", preco: "16.35", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/21997966962be47f144535c6c4d61ff9/Design_sem_nome__2_.png?token=SkD8Gmn4WCPib3vWrO4tIjtf0YxXZqRK2w4PLcY5p-THsdsiBPRLuFUkYrnlkDEW9vzNbihIeA2qh_Z0vKlbFTTOPBR_6j9cWO11LhWig3mt54XZxC_RaIgf0zjznX2xC-EutbTzjIZ-aeR9fSC1FCdTfG7u5DOBKXH-rqoeJBYYbE5_OwKl8ervcCSd-zNysh4xl5X5vZSdfJLg4CN71YBLGMtoxkuA8Hta0USOM7lKF7ONjOlQwL96LXR5OPPP" },
+            { nome: "Papel higienico  personal vip 4 unidades", categoria: "igiene", preco: "9.35", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f2afeb7d25bb31af62c07a9623afebd0/Design_sem_nome__3_.png?token=SkD8Gmn4WCPib3vWrO4tIjtf0YxXZqRK2w4PLcY5p-THsdsiBPRLuFUkYrnlkDEW9vzNbihIeA2qh_Z0vKlbFTTOPBR_6j9cWO11LhWig3melA_ubhtWGKj105EUci2NOJA512-t36qA1EawmuY5R2XSk7PZymbpdH9acppaGOo2KQ5clgGkqxLOw6UIwP1f2LP6mebznqIn8d0GUuPfupJsU2qrWs4LliXsCmuf0kTyc5EVfwXdhRR-ykO4kfPl" },
+            { nome: "Papel higienico deluxe 12 unidades ", categoria: "igiene", preco: "15.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/471ed5db6d262eadc9b6e9d61f40e359/Design_sem_nome__4_.png?token=SkD8Gmn4WCPib3vWrO4tIjtf0YxXZqRK2w4PLcY5p-THsdsiBPRLuFUkYrnlkDEW9vzNbihIeA2qh_Z0vKlbFTTOPBR_6j9cWO11LhWig3mCZH1JyLBgeCjVLT0fFePgsK9L61Hxq5gLqttJSu2yuBkgsoKojYxvGDmolqfyP67_HOrgZWr6Ldg1FrEgARHyXcGWq5Q8zrPBKXZwpViqxcC_wbvUSZdKH5h5SQ4VJ26m_g_rZL2EJMTISfJlYidL" },
+            { nome: "Papel higienico pimpo 4 unidades", categoria: "igiene", preco: "2.65", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3427c8026cae587396f01fe7d84dc76a/Design_sem_nome__5_.png?token=SkD8Gmn4WCPib3vWrO4tIjtf0YxXZqRK2w4PLcY5p-THsdsiBPRLuFUkYrnlkDEW9vzNbihIeA2qh_Z0vKlbFTTOPBR_6j9cWO11LhWig3nMX0BvuJVLo_UjHODq-U9FTVWdE03lUyk18TcU4szWN1u47vtuO_1nySCoEdcHcSphdcp7rcFJJIdc-qc0Tdb-ttbxrpPqzlFgVX7SFqFDzRvj-xiRYE3M2G7JgDY1T3z6HiXqtzvcwhf15IFgcbS9" },
+            { nome: "Absorvente intimos tripla proteção 16 unidades", categoria: "igiene", preco: "8.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/8c9fde656285652c66c31c6d157d76e7/Design_sem_nome__6_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA5_a4EVaDNZUG4hFXvn6jDtCcWqGYWq6VaqivfyDgcLFKpUJ_97Q81_7v4JUfzsV9okHlqcm50z3hNZ9VCS7ZR9LbMCuIGFw7qMIEnt9cAXsUZnsPNJGnwHb380TNc06T" },
+            { nome: "Absorvente intimos tripla proteção 8 unidades", categoria: "igiene", preco: "4.20", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cb8d2bd40a5595fbbe61ccb016ff944e/Design_sem_nome__7_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAtEeZcmaRiRRwGHhyAtB94255lVz0kbjtoQGH9nu5iABU83pW6gjsIC0hjxBoAHwPabzHeYLWkHZpt7pPgOpnmy-P0CAt91MNBwEeMYV04mYPi1g_XmdVKuXT6YS7Gcr8" },
+            { nome: "Absorvente sempre livre adapt 32 unidades", categoria: "igiene", preco: "14.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1a25caecd92b2b36255fd55c5aeecef4/Design_sem_nome__8_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAmwSyNWhLLrtMwCj_j1rSPxVGeAPnVE9zGQjdBM80M8c2lDa897iGeJY5aEi6wfHEvCfAEeW3UNY2jd3GC9uMun0VwQrUUUz9eaXwZtPEKsNnRY0NKXJosvDS9kdj-GT3" },
+            { nome: "Absorvente sempre livre adapt 8 unidades", categoria: "igiene", preco: "3.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7a282ec5510526482132b38029317d1f/Design_sem_nome__9_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAy2k7OvvxlmhcnlHkJ1144YcmFhNBEbQsoduBAQ1GcIGd8Rbh52lLux5tl_fj-iI8b6a42w0pftcGEh54-cKUKwX9PB3xA6HA_pZsrT0tceO3-mzCEwmPYHGXFZEAPOAd" },
+            { nome: "Absorvente alurays noturno suave 32 inudades tamanho G", categoria: "igiene", preco: "29.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7b8242007710d8df20e0725a1a2c9269/Design_sem_nome__10_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAH0KelOpUmuHpMQ_Zw-Ym7Flng-YWwZep3qUEHyqYfhBzvu3cAs90Mj3LxeA8hlvO8cFtFMqVDVB3VDhIA5u1IdbiDdoXJL3Qf7Vbw4ZfxjyoD6AmuPY4aCmfsNEqU8nj" },
+            { nome: "Absorvente alurays noturno suave 16 unidades tamanho G", categoria: "igiene", preco: "15.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2e8ed87781a3b6a71309e2bed3a8ea13/Design_sem_nome__11_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAxPyw8ClAWnSo9BedUxN4jXRo5tbo9teds8oaw9Tj8WXlzCI1DJn2llLlFHAL0zmfMYcH-Wu6e-BL9ye1e8OINfl8cjg9xOILJbZizijUFwMQ4LsiWDln3Pkk6MMjKsdA" },
+            { nome: "Absorvente mili protetor diario 40 unidades", categoria: "igiene", preco: "9.90", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c7d0baadbd8c2671f5f2a2598f5573ff/Design_sem_nome__12_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAviYXDc8zVWCRpAMDFq09VQ4aQhnHgSTR6WYEugGSDfVabHqIAfnRYHF-BKWMlLiN_Fn8-fR8GwAbY7DiLwTK-SkkIepHh9ytZkCNJ0XbHi-1Bnn5qbsI_LY-qeTgE126" },
+            { nome: "Escova de Dentes colgate 3 pack", categoria: "igiene", preco: "12.69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/bbb09c15d527d8c7b1edc9f2e5961bbf/Design_sem_nome__13_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAzxeR12tYOQjO_M0epSiOxYD2EBZfAd_WzPmQupvTY91GWsrhqCJwhspolZ7a8y6he_nk7t3pVy3ivkN1tYVn4U3i3_BeI-3D6GnrVLyB0_cZgRPBQXRlZVTYyWzCV28P" },
+            { nome: "Escova de Dentes Oral-B 1,2,3", categoria: "igiene", preco: "9.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/55188672bb52c922153386210f7bff6e/Design_sem_nome__14_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ-iuTuqxV2IGS89RoxRxa7YYRRdxp-uUyT1d4YsH4KRVbt1zdrCcVx52w4cOrMNBatnie9_ek9RXTFV9lW0Kf642W-SsgbWf10laSyOFyXxFcs5w_icnh41dmPLnRROKKuCUtGFMcaLIgWy_IbRv2Ys=" },
+            { nome: "Escova de Dentes Oral-B 1 unidade ", categoria: "igiene", preco: "5.19", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3b015bb0f5293c227a29a0ab0d19fe98/Design_sem_nome__15_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA1K-u1nMgAbSLMX3l6txWsAeCYQ1YwhPNRzHvS6WheUgrd91JhlAkYJC9XcqQgfHhpcLjJ_sewe7esKqWDV8ouh8cptuNglrwZX94pwdwrcuEmEL_LP7YuritLV70QUBI" },
+            { nome: "Escova de Dentes condor 1 unidade", categoria: "igiene", preco: "3.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f0df5f79c69adb91b83d1df4dcac2c4f/Design_sem_nome__16_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZy1JDt9UT1bIPSzsS2jV6wCc99fYttGUK7ak5cz2t_gxU1wrouY44M2wd83QCHq-GMHvk6hJpgiAdbTGhlEffFamZ2oOXDplf9cQKmACr6pt_CS5Uxps7VTxtrBYVl9Q_UKfsWe_LVTK05bmnXWGkzk=" },
+            { nome: "Pasta de dente colgate 180g tripla ação", categoria: "igiene", preco: "8.65", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3796143fa0527d154d4dc37d766b99ef/Design_sem_nome__17_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ-vC8SDyIWpjBMK4vOTD-VrymP5_eiHDKZFCPepRatQfvHe15CRgKn4kqZ_EC39l90bC295DWmnaGh7HqlEu0gTxvp8Os2zHm8QC-71y7_btbCuZd41TqxZifrN9xe3A95EuAuq-07SE9LdwB3gi5_Q=" },
+            { nome: "Pasta de dente colgate 90g tripla ação", categoria: "igiene", preco: "4.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1d413a076fbbf7ffd3702006738d3072/Design_sem_nome__18_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ8r3_ZOTwHNOaD1aGBB8Xs2kZKo1cFPFHm96xGLsEyf22XouhRGBhTQLrMUHzFGyCFhz-9JFmbsRdrf3fLLs5HbTr6RxfLSuwtfsuUN-HfUEjbLFvr8ehX0Zr2e-nvBIgKd8jdEJPrtxKvUCCgME0oY=" },
+            { nome: "Pasta de dente colgate 50g maxima proteção ante care", categoria: "igiene", preco: "3.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b04755cbeb919d1b91479cb5a3899d0b/Design_sem_nome__19_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ6qTesT_GlKTNVjkal-PWsCQhPFNcFe28HbZHrUVLrWxHmY1jAayjV87NsOfE4yTS0bLl4yJdipBtknH4d3NwrJngBwt5RPa9IBtveUZdDcHLaTDqsMbzhN6FfvfAbSSlBYGsAfIFJhk_E0QvzCcjZs=" },
+            { nome: "Pasta de dente closeup menta", categoria: "igiene", preco: "2.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0df421bb24c89f3b793ff1366d9fb058/Design_sem_nome__20_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ7pPhs-1JCnwY-iROAVBYqRg-JSAVTAOQFBHF64hVDRrN4JqRG1vX01kjba_fzGBn-5E8N3xZLofik6LZhfCy0eTHSTjhybtA8mTMPR3mAcZFGY-s5qP1x4y8V1fmwte3slIbi_3XUCpXMXmWMwbfOM=" },
+            { nome: "Pasta de dente closeup menta americana", categoria: "igiene", preco: "2.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/41e3cabdbdbdfd589fe5a3ee4577f2c1/Design_sem_nome__23_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZwEz0qhAiErFwTfSA6GXNSC2vROhJZUN1vceX9cdMXcXIotMViM7mQA2OXsJI38HNs2WoSgpv6TEgfENtvWrnkzjutOA-X_blkuOagLIa3tuHK7BhoMiAPANCjQCI6tctbdOyreh3Tkh_ZsflEwXrbs=" },
+            { nome: "Pasta de dente closeup hortelã", categoria: "igiene", preco: "2.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/6c7e003d7be745de6bd589d8b3af1f9f/Design_sem_nome__22_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ2qJeDo2ENo0NKsV9MGPVxeEMWDbgfkCfU6jlG3mfBD3xzYkd8gLCGti_6sIT_ZHAtDz0BzdaW2Lrlk_fwJUsQD4eqSxDEuDt30FCfIxA7pq3jL9LayosRZK29vgYtl6GYF29x8Jo_c0Rvo9roN0xnM=" },
+            { nome: "Creme para Pentear Skala expert agila branca 100g", categoria: "igiene", preco: "9.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2d85b8bf3067bb574ed617befd3b0bbc/Design_sem_nome__24_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAwkLoecV4oLeQ-Za9rKUcPcx-6GdKpwagIHj91Hx42BcI6Y5r_-G-wQXMbeihKiyhmzGiFC3hXCzHO4PHlIFZ7aWEzU1VXUIZ7k_oM15YxAFw00BOksEMJwAECSv9UZaE" },
+            { nome: "Creme para Pentear solon line kids melancia ", categoria: "igiene", preco: "31.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/017dd5f457e71ec0902b0080d54ca522/Design_sem_nome__25_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAUh6LlwIg7Tw4cvZWO1_NbGAIWGDnSc_1OdfRzYKPixSuohkjaGKZOa_S-98Mj62Qesjiu_7VQ0-oTlHLyRSFpT6VFnt2PqskZIAfRJUh2cwsTucpV8oLrKY_4llXML4K" },
+            { nome: "Creme para Pentear seda boom eternamente cachos", categoria: "igiene", preco: "23.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/aca94aeff9211cf3f67d663e47d17c73/Design_sem_nome__26_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAkTIYHFqL_T8hqVprQ4y0UnBnqGxrT-TZwzXBqsjHqklPKtvY_AvQm5UE55-TmmPB00jzDspHtMHdqA7DhbpGw23HJn6ly64GW9cXzl14FmyGFOGq6kICGH-gLEPk0sks" },
+            { nome: "Creme para Pentear corpo dourado santos potão salva fios 2 em 1", categoria: "igiene", preco: "11.80", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b3392dd18857def146218a8d737e6bfe/Design_sem_nome__27_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAvnf1zml6D42ZUDc1dISvV2_xPkIj0eS05cAg7Rej0Psu8XcSCG6I79n-vyFRAJOvbiBeoSkhrpqtJLvYltjHVtUGzqBwM-rtDt7XclthTzei4dbdx1IVRo3lsRkJ2e6Y" },
+            { nome: "Pefume phytoderm sensual deo colonia 100ml", categoria: "igiene", preco: "34.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/38e1b9bdc6ed72720442b5b800105531/Design_sem_nome__30_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAGrEcNcZjUcjylmONNPHhKCMbK6fAA1jRZahatNendhbOojGa9g70KrydW5VieVCoHWJnA2Umn011Ltg8thPqDvEwJNvRJFrrkJv54NTHz2b3kyfbxoruBuERQ2tHaSZO" },
+            { nome: "Pefume phytoderm lavanda água perfumada 250ml", categoria: "igiene", preco: "17.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2e80147fda8e2c53d3106c08d402c56d/Design_sem_nome__31_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ_R6XEfau9PTzim0MtOEOQ0cMJhU4ri6MYAMvTLF-NzW2szIzpeynV2d3Z1TtWyAPyFGHW7XW4LbMM6JttRci1jc0mQV_6hyiSP7d883JSdoqzr97YggyzLcolYZmU-w1tMc653SVVynQ4AJRFNDVWU=" },
+            { nome: "Pefume gellu`s night 100ml", categoria: "igiene", preco: "30.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/86fcae214282bf440db11f050006f001/Design_sem_nome__28_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ_xYJiPfcl9fUuomkxXcH82utFp6TkWwOxrbdfENvspjMu6qRc1cJgShP8A_kQIQIoJrnS_Zk3VNayhouSoP5mv1WVyp5zV_4m-FfymFi87zeT6mE3Nyd1xrmA8krnqYIMO087RXlyqx2zJjstoN45A=" },
+            { nome: "Pefume men`s club 52 infinity 100ml", categoria: "igiene", preco: "38.79", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/86fcae214282bf440db11f050006f001/Design_sem_nome__28_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ_xYJiPfcl9fUuomkxXcH82utFp6TkWwOxrbdfENvspjMu6qRc1cJgShP8A_kQIQIoJrnS_Zk3VNayhouSoP5mv1WVyp5zV_4m-FfymFi87zeT6mE3Nyd1xrmA8krnqYIMO087RXlyqx2zJjstoN45A=" },
+            { nome: "Sabão em pó Omo 5kg", categoria: "igiene", preco: "34.95", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7c25754982dc961957e53aa8fed958ae/Design_sem_nome__32_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAup80IdXuWo49wKHrYsQgG5tCCcHd7lkZZ2Hx33FeHA2tJU6IsXq03gsjuA5uB_ZajGOsvk2IdockmNQEiowJUhnarbv69Ugut0b4AX2PK1Nmuwq78lT_-36dszOXN898" },
+            { nome: "Sabão em pó ala coco 500g", categoria: "igiene", preco: "4.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b0b8186f89ced1f3708f9d70efdb7150/Design_sem_nome__33_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIArEXl8jINQ94TgPP4j1OjGQCnf9vJrZHAyAHAej3SHDbdC2ZyTWvaPaFv4MUpc4O0vW6bkH9KflDDnjTWmJdFkdBh9fgZI2JYgjYcN2tcBlVJC4lpTuXKsXYQZiLPieFR" },
+            { nome: "Sabão em pótixan ypê 400g", categoria: "igiene", preco: "4.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/bf821a8cfc921ec531700c1fd12d1287/Design_sem_nome__34_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAvcWPYeVIATHmNXp0vobiYHUd-LlcE5vBciMHiy6bEvvV9S0cwv90TDA-FP-Ndaj_2MWBVLdwLwQzVUEB1TpKExj6a7gnZ-62-E9JL_ExXelEdRIZwoUaIkXC0_R9yopK" },
+            { nome: "Sabão em pó fresh aroma citrico 500g", categoria: "igiene", preco: "2.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/501e34a6995fc3c59bdd899edcd9b732/Design_sem_nome__35_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAjuSYLES0gm10p3Wk0aJg7Og-M-RirOgbePmAHfn_O-YeLB9c8y_HtutdtVHm7HbMrDAQdqu7_cMNfoEYKeOeciP8E-7dFSNNnLM-3IzJekpsSk_0LJPUnAsBp1SS8lMW" },
+            { nome: "Sabão em Barra juá 1kg limão", categoria: "igiene", preco: "9.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/04938f5cf7f32b9398d91d467a63031b/Design_sem_nome__36_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA1RmIQ2fD3Jxx2oCx4zp1L1zf317LctxNoQ5HWnsx_UUkzIHlR23avH2aVNHPL9oY3yOMD8dcZGwqaETzE9DCdJ_8v3AG1enFraTOvcwQU1TdZo0HjghDBTYHnrCQzBY8" },
+            { nome: "Sabão em Barra ype fresh limão 900g", categoria: "igiene", preco: "11.59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e3639959520760ac921206f872ec1512/Design_sem_nome__37_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIApHZoKXo2wjgts36m71DohLwZDl_D6BHurlMg9juSMjtw1jDu4BWHC0qQoBn5vXGQKVxResM68LsBOuXBjm-fn2J_dLbwE0zEMac0bTRZMOR1a-90HyD3_vxKZn-UKV_7" },
+            { nome: "Desinfetante pepy", categoria: "igiene", preco: "7.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2f4c2b9440a31f2cd0a3c94d04889d81/Design_sem_nome__38_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIANBTyKM6d7-ThWuUHTkBSkNTcYA1brlTqYl1xTDkQPVS7pfNb2zdsVMWtw2YL_JH0QBJziaF2L-b1UwlLX0Uhw_WY7YF6woQaG3TZ6Yqq-MWU-bgepYpB-pUtfOqeZajO" },
+            
+        ];
+
+
+
+let carrinho = [];
+
+function searchProduct() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const results = document.getElementById('searchResults');
+    results.innerHTML = '';
+
+    const produtosEncontrados = produtos.filter(produto => produto.nome.toLowerCase().includes(input));
+    displayProducts(produtosEncontrados);
+}
+
+function filterByCategory(category) {
+    const results = document.getElementById('searchResults');
+    results.innerHTML = '';
+
+    const produtosFiltrados = produtos.filter(produto => produto.categoria === category);
+    displayProducts(produtosFiltrados);
+}
+
+function displayProducts(produtosArray) {
+    const results = document.getElementById('searchResults');
+    if (produtosArray.length > 0) {
+        produtosArray.forEach(produto => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+            productDiv.innerHTML = `
+                <img src="${produto.imagem}" alt="${produto.nome}">
+                <h2>${produto.nome}</h2>
+               
+                <p>Preço: R$ ${parseFloat(produto.preco).toFixed(2)}</p>
+                <button onclick="addToCart('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+            `;
+            results.appendChild(productDiv);
+        });
+    } else {
+        results.innerHTML = '<p>Nenhum produto encontrado.</p>';
+    }
+}
+
+function addToCart(nome, preco) {
+    carrinho.push({ nome, preco: parseFloat(preco) });
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    cartItems.innerHTML = '';
+    let total = 0;
+    carrinho.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>`;
+        cartItems.appendChild(li);
+        total += item.preco;
+    });
+    document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+}
+
+function removeFromCart(index) {
+    carrinho.splice(index, 1);
+    updateCart();
+}
+
+function checkout() {
+    const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+    if (total > 10) {
+        let message = 'Olá, gostaria de finalizar a compra dos seguintes itens:\n\n';
+        carrinho.forEach(item => {
+            message += `- ${item.nome}: R$ ${item.preco.toFixed(2)}\n`;
+        });
+        message += `\nTotal: R$ ${total.toFixed(2)}`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappLink = `https://web.whatsapp.com/${encodedMessage}`;
+        window.open(whatsappLink, '_blank');
+    } else {
+        alert('O total da compra deve ser acima de R$ 10,00 para finalizar a compra.');
+    }
+}
+
+window.onload = () => displayProducts(produtos);
+</script>
+
+</body>
+</html>

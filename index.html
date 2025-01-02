@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadinhop Edson</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Cabeçalho e menu */
+        header {
+            background-image: url("https://img.freepik.com/vetores-premium/fundo-abstrato-laranja_42634-49.jpg");
+            padding: 20px;
+            color: black;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+         
+            
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF5A00;
+        }
+
+        /* Barra de pesquisa */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FF5A00;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Estilo de categorias */
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .category {
+            margin: 0 10px;
+            color: #FF5A00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category:hover {
+            text-decoration: underline;
+        }
+
+        /* Resultados de pesquisa e produtos */
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .product {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product button {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Carrinho */
+        #cart {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #cart h2 {
+            color: #FF5A00;
+            margin-bottom: 10px;
+        }
+
+        #cart button {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img   style=" float: left ; justify-content: space-between; padding-bottom: 10px; padding-top: 0% ; " width="200" height="72" src="https://u1.padletusercontent.com/uploads/padlet-uploads/933833254/3809e7f1eb861e488043ad0215293231/MERCADINHO_EDSON.png?token=_siI4-0qIuaG7Br3OeW4tDSftcnfUhFg1A5NweFgucHLE-JfsKvk46i5NX8FrTZqT05DxqHPcDXmNGvc1RffU_rTEX4MuACAXYIHC6FcdrFtLy6sk_5zkwVIaCSsvWWFqUNsWfM1JO4w4ReNimKmueeiaTwB2soR-GRwvLAXCirqMvNn_2UNbT7ZMWhiiu2c_sZI_4bjOjRzESibvh6vId071urW4ogxcc2obOOIEtCSAlHXY2Yma9A_t3y8u2e6">
+        <h1 style="margin-right: 10%;" >Mercadinho Edson</h1>
+        <p style="margin-right: 10%;" >Bem-vindo à nossa loja online de materiais de construção!</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="index.html">Início</a>
+        <a href="congelados.html">Frios</a>
+      
+        <a href="higiene.html">Higiene</a>
+        <a href="alimentos.html">Alimentos</a>
+       
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produto...">
+        <button onclick="searchProduct()">Pesquisar</button>
+    </div>
+
+   
+
+    <div id="searchResults"></div>
+
+    <div id="cart">
+        <h2>Carrinho de Compras</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> <span id="totalPrice">R$ 0,00</span></p>
+        <button onclick="checkout()">Finalizar Compra no WhatsApp</button>
+    </div>
+
+    <script>
+        const produtos = [
+            { nome: "WhatsApp", categoria: "", preco: "45.00", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b2a2141a24f0962e4a560a61bfc2fe2f/Design_sem_nome__20_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAfUxR38MuNi1mhB3G3haO2tnshJ15dflYYNUvg4rlpMn8DyGl2F_Ato7F0UAgxrCP9skAcfr7cghtid_ca9ICdOwJQ_XLGATAWkewBFZhGNY5DMlpi75EgQP59SL86NDA" },
+            { nome: "Instagram", categoria: "", preco: "50.00", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/231a32841665a9296f5bdd8c28076a48/Design_sem_nome__19_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAlT4ham7imFn0rwJACT1-Xxc0ZecnKbzQaijD-N514UzpIU3NyYzQEA2fixekIJv-mxKJikQIqZ-be6M4lllQikZdNRPnQW_vUsjOhW5C-FU_L9Ciq6Kf0Z5UttRITSEh" },
+        ];
+
+        let carrinho = [];
+
+        function searchProduct() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosEncontrados = produtos.filter(produto => produto.nome.toLowerCase().includes(input));
+            displayProducts(produtosEncontrados);
+        }
+
+        function filterByCategory(category) {
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosFiltrados = produtos.filter(produto => produto.categoria === category);
+            displayProducts(produtosFiltrados);
+        }
+
+        function displayProducts(produtosArray) {
+            const results = document.getElementById('searchResults');
+            if (produtosArray.length > 0) {
+                produtosArray.forEach(produto => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+                    productDiv.innerHTML = `
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                        <h2>${produto.nome}</h2>
+                       
+                       
+                    `;
+                    results.appendChild(productDiv);
+                });
+            } else {
+                results.innerHTML = '<p>Nenhum produto encontrado.</p>';
+            }
+        }
+
+        function addToCart(nome, preco) {
+            carrinho.push({ nome, preco: parseFloat(preco) });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            let total = 0;
+            carrinho.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>`;
+                cartItems.appendChild(li);
+                total += item.preco;
+            });
+            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            carrinho.splice(index, 1);
+            updateCart();
+        }
+
+        function checkout() {
+            const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            if (total > 10) {
+                let message = 'Olá, gostaria de finalizar a compra dos seguintes itens:\n\n';
+                carrinho.forEach(item => {
+                    message += `- ${item.nome}: R$ ${item.preco.toFixed(2)}\n`;
+                });
+                message += `\nTotal: R$ ${total.toFixed(2)}`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappLink = `https://wa.me/SEU_NUMERO_DE_WHATSAPP?text=${encodedMessage}`;
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert('O total da compra deve ser acima de R$ 10,00 para finalizar a compra.');
+            }
+        }
+        window.onload = () => displayProducts(produtos);
+    </script>
+
+</body>
+</html>

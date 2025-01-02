@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadinho Edson</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Cabeçalho e menu */
+        header {
+            background-image: url("https://img.freepik.com/vetores-premium/fundo-abstrato-laranja_42634-49.jpg");
+            padding: 20px;
+            color: black;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+         
+            
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF5A00;
+        }
+
+        /* Barra de pesquisa */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FF5A00;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Estilo de categorias */
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .category {
+            margin: 0 10px;
+            color: #FF5A00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category:hover {
+            text-decoration: underline;
+        }
+
+        /* Resultados de pesquisa e produtos */
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .product {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product button {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Carrinho */
+        #cart {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #cart h2 {
+            color: #FF5A00;
+            margin-bottom: 10px;
+        }
+
+        #cart button {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img   style=" float: left ; justify-content: space-between; padding-bottom: 10px; padding-top: 0% ; " width="200" height="72" src="https://u1.padletusercontent.com/uploads/padlet-uploads/933833254/3809e7f1eb861e488043ad0215293231/MERCADINHO_EDSON.png?token=_siI4-0qIuaG7Br3OeW4tDSftcnfUhFg1A5NweFgucHLE-JfsKvk46i5NX8FrTZqT05DxqHPcDXmNGvc1RffU_rTEX4MuACAXYIHC6FcdrFtLy6sk_5zkwVIaCSsvWWFqUNsWfM1JO4w4ReNimKmueeiaTwB2soR-GRwvLAXCirqMvNn_2UNbT7ZMWhiiu2c_sZI_4bjOjRzESibvh6vId071urW4ogxcc2obOOIEtCSAlHXY2Yma9A_t3y8u2e6">
+        <h1 style="margin-right: 10%;" >O melhor preço você encontra aqui!</h1>
+        <p style="margin-right: 10%;" >Bem-vindo à nossa loja online, aproveite nossas ofertas!</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="index.html">Início</a>
+        <a href="congelados.html">Frios</a>
+       
+        <a href="higiene.html">Higiene</a>
+        <a href="alimentos.html">Alimentos</a>
+       
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produto...">
+        <button onclick="searchProduct()">Pesquisar</button>
+    </div>
+
+   
+
+    <div id="searchResults"></div>
+
+    <div id="cart">
+        <h2>Carrinho de Compras</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> <span id="totalPrice">R$ 0,00</span></p>
+        <button onclick="checkout()">Finalizar Compra no WhatsApp</button>
+    </div>
+
+    <script>
+        const produtos = [
+            { nome: "Arroz alteza branco 1Kg", categoria: "alimentos", preco: "7.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/666f494dbbd9d5dc04442609688dab28/arroz_alteza_bco_1kg__a7a361ee_bda5_482e_b202_c0d9eb5a5124.jpeg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA3I7t69r-8KI_pudIx5uHvX5wvdO0bBBdkt-N6CDzkyV8CBkDkcBAi0bdvgRh85fODo1uDIVvPX1hC12fathLIXxcyvcSjbXAxWpsbUbZBGRw-810cdoFj3lqEYt36QdBtOothNYdPkExk8MS08ow5bDDEsojSJvK-sXMrTTBur9j1hZkItPaOHYhL7O7v1MS" },
+            { nome: "Arroz camil parboilizado 1Kg", categoria: "alimentos", preco: "8.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/a1cb3bc6ef2507f42a97ed646e25d68c/Design_sem_nome__27_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAqFQpwVsObytBXCslmJlNGdFxluPE7e7HJOPJbt4yqkLiXIV7U-p4gaIFMz3GHXB33_wXildXiYyOUhGMu5wOgq1giiOrwUmo_x8A_KaTdpQ4qBOAM6uqE-EBIx4NOCYm" },
+            { nome: "Arroz namorado branco 1Kg", categoria: "alimentos", preco: "7.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c8fd377579e4e00de006fcb0112595fc/arroz_namorado.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIASb9Db-RJyJzur8_3i003frtTDEt8sOYHm16nKW3U9EemyfU62xY-Bybi2DDQlNf_p5CXZqHaCmwx3Whh5kvXLsaixUNm-1tS23VpMVwFP-tKyDXU9YJu_-zUEBIjqNGl" },
+            { nome: "Arroz namorado parboilizado 1Kg", categoria: "alimentos", preco: "8.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4e56859c6de672e53235aeff88082cb1/arroz_parborizado_namorado.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAviHF6fH4bGzBELRrHlIJ9jSn3DoWl9eHzLp0IPVObSAY5KDvgWHjed9pvOnu6ac-CTFCA6HdksSnT267Ou5ho8wB4XfxgmqvvUvBLbYffFDV7a37L_6M8xN1zjKfaLDjZFh0nc_vL-Uzco_guqc49w==" },
+            { nome: "Arroz pai joão agulhinha parboilizado 1Kg", categoria: "alimentos", preco: ": 8.25", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/ce715f6ad698c2c1de934a354aa7d285/arroz_pai_j_o.jpeg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA967MQ3kix-XPfGB1g5oEIZED2DKMZKPqmj_6saorqznX4Lbje62DmCEgd0LmmW-gPqmMjYb_o9SnVa1Pqq0DWZJQTTOBADccptJZi5_gzpY-8M3tzzFCNfxQVfGsfYjF" },
+            { nome: "Arroz Pinheiro parboilizado 1Kg", categoria: "alimentos", preco: "6.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7c269ff9da54867c70ed4845d9e6f5eb/Design_sem_nome__22_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAyoVY-NQjLYlbvtdBHRbB9ZWT4GBx-sfKUq6hGdrXaE81tJznxNoXxdcGPqpvpZLUww6lL8wUhFldKRS3eryi_ufqsV6ib2T_i4rgyZ5Pny0ltl0m3yppf7u07pLFBj1g" },
+            { nome: "Arroz branco Pinheiro 1Kg", categoria: "alimentos", preco: "6.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7a98f505f92e4e959fa0dabd3cf77fff/Design_sem_nome__26_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIATLjWAijZ4XV_aNI5tJ0Ap0yvhVuwfUnnCtuTv-3NM_5ZbQFo9CUYzwjlXQSq-pyccywP-Yn9D-cpptgqXXOMI0QtdtS0CYZ8xOj3gfcPlt7e_2RRf39nVaD-u5NUX-dR" },
+            { nome: "Arroz - ki gostoso parboilizado", categoria: "alimentos", preco: "6.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c38f64f8b6a809b1637b570494713afb/Design_sem_nome__23_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAAk6iqeihYADRHMLhAZFqtTaqFVonz3jol3B1ZJy5l7Ru3Fs0X2CHJmS3b3bNcShszuJtntQsSzq_cQ-Hnfewf6D4RSaQAE-n_Hf0mqc9ptvCJv6xkRSI_zV28PgeQFdC" },
+            { nome: "Arroz vo olimpio branco 1Kg", categoria: "alimentos", preco: "5.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/eb722e27564b8d412aef37246915dd36/Design_sem_nome__24_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAs_GuLGJ1Y2-E7091ngTOeg7o2dtdf7DAsb2Im8QNROOxhKI5DJrmIZoKAsMi7L0KQkx-r8fMeKr2TcMvM8pr9USoaCfOLkCoF0Z2ehMd0akhuD3AwpXcNsQJAxz2svoV" },
+            { nome: "Barra crispy ", categoria: "alimentos", preco: "4,35", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cb34e2e368bfc4f0815b17d7ceccf538/barra_crispy_protein_nutry.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAXoiKSHrNA8EJlqP6mRpegNyU1_lxM1U4jNdKodiTgIbge4BoGrhBCxHGVkd9vqxesYF0HJQfANAJAjelX0BQnti78mtg_Q4-cuBlBAI0gxId39gYVL_h1gXCaVR7baro6SKSq7FTJv2x2f6sn0V96A==" },
+            { nome: "Barra Bananinha", categoria: "alimentos", preco: " 2.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/6b00ebf4af590ea1c0cd4441216c988b/allnutri_barra_de_cereal_bananinha.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAYSxgkMLvF9A6Ay-tXRktg1jrWare4Ps8Rr3w5TKu3W0aLcG8hBlguT3czwHmUwQSbRJnDYKkl3NDp4Dr-06BnoIT11mQXAwWWcPg-rWJPAtHoPmNY09R3NyHokmffGE_FV2zw3AoZ-Cqg5pFVuL_Fg==" },
+            { nome: "Barra cereal allnuri ", categoria: "alimentos", preco: "1.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/49c6e344395176ec692b36654a1417cd/allinutri_barra_de_cereal_banana__aveia_e_mel.webp?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZwhTjDf3T1EOKDl39VtMqp2BRlTJRAs61qS6LPnB6TaInWxr0GAudrSwMYUtcOZdexh-cZHY10X2K4ip6VnnzEy10SXU1jzBpPl_00cWEZkN5tm_UlpD3fb90IAm9HIyxevlTenB1pdBmjhcDHXxScuuTMF-_pleP2bcwM1LV9zbsuDw610HMmgurNj3RELpeA==" },
+            { nome: "Barra nutry cacau", categoria: "alimentos", preco: "3,15", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e1a1b5ea72d6addf8b0eaabdfde5f468/baara_3.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAs8SIVxxPYt0dCJGg9uOgv-Lrb1zEJZFand84A8ykwuQ9pbMqLkafaxvOklsoF8LDVTX-mfEay5paZhDHjNAGk6qoWJDEX2PSoFD1INYZClLfFn_fYF_he8jXKTXMaJJ2" },
+            { nome: "Barra de cereal bolo de chocolate ", categoria: "alimentos", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/6c1b706826bb8b09a43133371d2e3f96/allnutri_barra_de_cereal_bolo_de_chocolate.webp?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZyPYlaOE9GlGXajUZ-BZIPsctoMRr6YhBHDh1TAQORUNfCgs5FnzaDGFSfVXNANR9-4mxiKQw8oN7NicOA2KKvljAOCkAMkW3sw0aEOvIStktsKXi-6TA7ZZfx7mtoml6hOahvpTpD-foONZ40fY0gEeiV4vSZazJY0dF5uHPQHJ" },
+            { nome: "Barra de chocolate confeiteiro chocolate ao leite 1,010", categoria: "alimentos", preco: "29.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2ca08592b67c96d5ee283842a5c8405d/Design_sem_nome__28_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ13HRhw2B5tlL22YdUVUjRXnLBVjtN2-LAkCtyq32wP35X3C-kk694gUfZ-kTLNQfUYXCFL_csATBFYFCPgVpeV9Imy1bXtSQhUVemx-lVAGVpbPAIKJkulY9d-o4-ltoS0JuDy81PNPw4Cls592Z8c=" },
+            { nome: "Barra de chocolate confeiteiro chocolate meio amargo 1,010", categoria: "alimentos", preco: "29.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f7733ecff47d87eb09fd98766f32e7e6/Design_sem_nome__29_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIArG2nmbeb5Gcui24Z6IVCnqgp3KCAkxW0axuHX2HfZ_JVWBzGTu7atDCmnDmCd9my-hzuyzr39_WcWvB_DWv7LBh2KDNtiYywy3F6ZQB_D6eNSgUpwkI1zK9mkDVvgdYj" },
+            { nome: "Barra de chocolate confeiteiro chocolate branco 1,010", categoria: "alimentos", preco: "29.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c7f272bdc0588f980c007dc6da665a27/Design_sem_nome__30_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ5FNl_NcJc-22HO3MPMu2WxDUrjCcg6x6z_lSBtZFEb7um_65zZHxolZu0Iml43WAX-qRrYbDBkka0SDySD7pDzigFS9Xx9gPzOOlJ6wAIbNSZc6Zj0Li70FLNnuIn3iUogYrqaq2T5oMbhWCGQI-Js=" },
+            { nome: "Butter toffees intense recheio com 53% cacau: ", categoria: "alimentos", preco: "20.30", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/667545ecc240882d2777fac02ba0db45/Design_sem_nome__31_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAtUvVMCFGo3IjqkNUbM_SFHONfQTcGPu6dYugkEP0b-V-isYk5UAzNDI3jEy-B-ZP2_r2ffd9Q4grNv7laKaDyejInsix0kwLf0fyJrkQqXFGvUUmn-JPS9lNTC8DAtKX" },
+            { nome: "Butter toffees sabor musse de maracujá: ", categoria: "alimentos", preco: "20.30", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2d9b50654c93e8a5b4451c61f68471c6/Butter_Toffees_M__Maracuj_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ6peeIYHmEXFaM2W2ASj-csemDajgF8w27u5HXoupzIJvVCHapc0-SgdcyNiVM-GLcaCnhUilBDzbQy32_wZGGsECuMaJOYPjTqT5pWAseTjRZ5VmUi3MRpWMJEsUK6-jgsOyNqBYxiJB-HBQU1Na0s=" },
+            { nome: "Butter toffees sabor leite 500g: ", categoria: "alimentos", preco: "20.30", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f9ee657fbe5560e60a25cfb2a3942d4b/Butter_Toffees_Leite.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAspZeJCj4X6mxpatjLtciJ4wLfQ81lwtm-HobSdWNx4Ynm3DkrJAnACWHl_aabRbBGjGCbavM97jVm6pT-qIq0X2oi5hZ7ScSLA-g4WV8k_W_nJDB64PQ9JtTdz_8ivls" },
+            { nome: "Caramelo meio a meio", categoria: "alimentos", preco: "19.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0569de20f970ec7b2722832ac1b54c18/Design_sem_nome.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAcffuYYBxbcoMa4pCnLXTayORQA2IGsAUkHjZ54zkrqfLJxuohAhkK5cyggTZF23espggGt2b2VTSXAgI7HAlOyHynJm2sYV02YdE8h65nXSczgSQlVbsguszNtnj_D5O" },
+            { nome: "Caramelos recheados orihinarilidades banana passa, coco, goiabada, morango, limão, menta 600g", categoria: "alimentos", preco: "23.69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/d6c87e213e7721fbbb2adbe4eca88380/Design_sem_nome__1_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAR0xG10SAYzXQB_IiJBjzdkVyb_sWLDPzPOtZR9RaRYbkfuv01NjceQ9s3dEv2dIJF_H57KyQ0OPe4YRA39VFG3dO5RJonwh77cMaqNjcHYQ2d5B-USDuYeDSwWdyDMUf" },
+            { nome: "Ferreiro rocher 37,5 g", categoria: "alimentos", preco: "8.09", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/ffdbe0387646df33f7e82cb6ba6fc186/Design_sem_nome__3_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAghef_kj-aANNxhN2utd8QwgqqRI58DqhyozsrrAEqXr1-oP-281QoyhX2BTM9KDNHqsLxJfSPWGZC14rMKcdzB5hZw6GWt9OTNSI1T2rdmesxDrYsCwqQWjIP2vM23QU" },
+            { nome: "Ferreiro rocher 100g", categoria: "alimentos", preco: "25.19", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c0b33976af6b3458d625766e95b0cea6/Design_sem_nome__2_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIABm1nDMsb8DkDo2XI5_T24L6QxJ86KjEM91b_s2AzGf3-hJafzaJiDM3V-ttcEZQAwH4UmA3abM_nOh1eAAMU_9rsTMVNQvKcg6xikFKZTaUBv-Lw-8cvLGpw-J8Nkcfx" },
+            { nome: "Halls", categoria: "alimentos", preco: "28.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/9d2db65a702b389db739ffc730e717a0/Halls.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAIaAQXceiylCR3SRCzYr7kxXpUy7tavn0puZFPxRsNzl1Mx1nWXKMgsaGP42idyrVqH93Pl4uPPs-CarS9ea9AwEhphPf9rZuGMVSvKsNSHE=" },
+            { nome: "Icekiss cereja", categoria: "alimentos", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/738c0753c958e5c56730485a798375ac/Icekiss_cereja.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAQVgVCh56ssDbbe3DEMfNgYd-F7KOu5m6Y8TKyD-9tNqrzrbl3eT5xaWmJUMQFCby3O0DM3a7OBdIKiN8rNqIygge7jFPAeDlHu_y8JWu_p6Srn_Km5VW7FlW-YqNeEfz" },
+            { nome: "Icekiss extra forte", categoria: "alimentos", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2dbc014da3d20208f897570eabeb1bcc/Icekiss.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAt1sDVA1IYB-Wkg2zD_H48_qOM7HAvbGWaUVdFaq-S01cZ7cDxUzXEifhn890D_Oqu8Z0qihQ6-KQc7roOtfYS8AnOamzK3IRuHJuzrVeA37zIPqgPt69-3C5KDIcAWya" },
+            { nome: "Icekiss menta ", categoria: "alimentos", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4fe18bc01b4673b7eb690e8d75b7f62f/Icekiss_menta.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAXM04DvUmnZ2KEYStE9jq9Bw8Dn2-4nlMaN0Fq8O_gXn-zwqP49PIPsAV72oNYosmVT_ER3_wNu4EhyiGr7EXPumXbJoU936KlX6_E0ZY3FNFPMP2yKL3xOpXx0MiqVKb" },
+            { nome: "Icekiss morango ", categoria: "alimentos", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/8acdf619d07494eae9ff3117fb120fe3/Icekiss_morango.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIADu7L3rTadGn5CarcYZujQy6YwJFtJXwqUyW9L7XU-idJzaQ8wDB99NBYG321c3Uc_2CRYPk8jdCvzs2RAANZobotLU-CFI4KOhTuh6pzWJak7XVjcv-DImZSKvBNnPeH" },
+            { nome: "Icekiss tentação melão com recheio de chocolate branco ", categoria: "alimentos", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3988aa9d9005344acd21b7d0712c7929/Icekiss_tenta__o_mel_o_com_recheio_de_chocolate_branco.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAwnEHndL6pQEu5q6wJT-4B2CfmCXCUA-1ERAWvTKqYH8V6YI8OM8eCtYojqBGme2_GTR3Rfd23X5CXiv_K1xcX92in8TGI25gbhEJMURlrP3un0I4-lnweIjsRg5clX5fmLubWDUJpHEJE1xYdKDst83f3YpEBjKxlbG9lvYv9beIp4VoohRDgetwHmesRiS9" },
+            { nome: "Minty 1 unidade", categoria: "alimentos", preco: "32,49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/609e42fb9a23e7268104a8cec49eb8be/Minty.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAyhTtfbc7HE8xu14PKCZ_9D0Flxdk8eWtnJuzGyqaXP7bk2AgiDa5X72mB6t-JSjD8qe28nxfA1LZnBVhjxYdrTDWgC0rq1gfDa156EKvtVA=" },
+            { nome: "Mentos mint tradicional", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4c22c744f26c6b7706e6ace920a4b6f6/Mentos_mint_tradicional.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAAShAqVw6lxo1Dj7bfPdKfoaDEze5-GE4REJYbcjeOA8wqLus0U6Lr-yXnVEscErKno1M-lHyQpWpv4mWU42C4R4cBSNVTTY1bF28qzCr0CuKOHYAGw8wRK3IRZ9b_ht5QGp4ENCVN_dHSt4skj8WKg==" },
+            { nome: "Mentos tutti frutti", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cb00f60a5b25beb3071f395ea949370b/mmentos_fruit.avif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAScMnzNfLy1IAiXVr48cLDg4hPo1rdi5XxuygY5YT3g_11sgSabCHNOTy8NxeTU3vy9tvcPSFgZ_tmMCx-1O51br_73rqjjfo-38tXWts2MFx51q-2tFkcdJyDnSbQhAV" },
+            { nome: "Mentos frutas vermelhas", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b2ac22dd7998b777e51b678fb07cdfce/images.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIANRahTCd-5bh9u2QMFozvvgsRZLLlGsisELuqZcqWun4bcjeYdQjCiKp1AFTkfKT6Lq_PjymacGHkPppklPgiDnl3fyL0QR6n3YtItoGuG4z9wHirQaWNjuBrSkKoLC9D" },
+            { nome: "Mentos fanta", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/ce5d6f8525c9d3e893d3bb0f8551bff2/mentos_laranja.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAr4vBlPkYzS8DguWgxP-KrVa_ofNXh2bO_nbAJpQjpTvT3zIPCHumx0acnuUcwUBQS5bZdsPPyldvr5h9sMZvi2aLSOKo6CVpV3jVAeZR24GVlVeas6niSADLRSmOIg4o" },
+            { nome: "Mentos yogute vermelhas", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e3c4af7deafb1d87248c8fe24a102da6/mentos_yogute.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAbtFWY4LvsYktRhloYtQlzmWnjsYiz6u3FdOIAx1jE3sHTM0Qf1VLI-VymUa_c2JudVJWdqr3LB3tmKD5yPhF1D4zbJ1NtG2KPJgksXPb0pfOihrwpryrFTvIyCwoN01V" },
+            { nome: "Goma de mascar mini Mentos pure fresh fresh mint 8 unidades", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/55e28f082b80008189d54dd8850da651/tim.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAumkjG9Jsruq9Y0ZqhF3bsUp6ZHLJAFK9vVbrs0LElwCvq58GDmr26oTeTpIUr1r3JQdawwi3Ino7L-38sktuwt_ICCWoLfSmb9_K8-XlK8g=" },
+            { nome: "Goma de mascar mini Mentos pure fresh wintergreen 8 unidades", categoria: "alimentos", preco: "2.50", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/89b03794722a4cd21bc1d6f4d0737517/Goma_de_mascar_mini_Mentos_pure_fresh_fresh_mint_8_unidades.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAts5KU40opSXwhkIPDA7uODB-jcVTnVLNGrrrRLEpwQnxZygFgODd8fTkbskpLFxXW0fV-aq-wJBIqHYfKGVwpoYzD54j4yRm0V-ozd4Ua0UXfaGyIbvZaD3xWF4nHTTAULkUwtSgQ8OxGETVm6_pPfWLWWU1A0emy2Ct7hJvNeZGhD0Im4vaLT4_Ur8_pXIo" },
+            { nome: "Goma de mascar mini Mentos pure fresh fresh mint 28 unidades", categoria: "alimentos", preco: "11.69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1adc80b7f08a2955344b30205c719384/caixa_de_mentos.jfif?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ5YmJiWt4qlIlzWbYJJNL6D2ALf2xyo8vRW1fJfMNqJkE8Lu8bYiMJYIoXUM7nYQ9FbiEgXpQ97FU0s4z8Q_2U4UkTJcUFDkPyDsOXNeipwpvSYyoZEPBqn70drkp7CAKtHzXz6grc4Mula76_3YmZA=" },
+            { nome: "Goma de mascar mini Mentos pure fresh fresh mint 28 unidades", categoria: "alimentos", preco: "11.69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e92491db49c793dfe57e3c5790dcabb1/caixa_mentos_2.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIALbSEBGG57Iw6aLpfITjfT4DhblY3RzRsTP-MiFLe6WLUHM_r0kD1gllNgxdX_GYMdN6RLxxellxeHbuQRCDKW4SlxUoHHXsGW5US9iMbtzA9P9_alIKkU5bMVisApofA" },
+            { nome: "Goma de mascar mini Mentos pure fresh spearmint 5 unidades", categoria: "alimentos", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/957302e430a38fc65f63d490609ca27a/trad.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAR7SoJ65yd8LmWkjR6JmBMyJA8CexPnR08fZntwPDlI6jJlM_Sk8IjLr2qaoI6j2xdVc8VBKtYLEqhdEZnmORYk1t8IUf5gnglzLbgr34nHI=" },
+            { nome: "Goma de mascar mini Mentos pure fresh strong mint 5 unidades", categoria: "alimentos", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/87388787144508d651d8e24d6d182547/3.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA2-F0Cub7L0bEgsKCW36HeM32ElNP1GublZjHblQZpeZGNiXdc-B6snLg4JVRo-e0nODaKxfOSKnv63r_3kaIFytj5mpZajtjTefL3zicm_Y=" },
+            { nome: "Goma de mascar mini Mentos pure fresh morango-maçã verde-franboesa 5 unidades", categoria: "alimentos", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3f6aa9f5ff2fc1972446f1f8a5443ce7/images__2_.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAqTjtYrK8XcmgZLpEf4ZAl_8OQlyaC0b9fxzVnrzO6gBfFgehJCHCO12q3BpHRdWYR5SvPGnV4-94p6FFebA1yn-CrayqLXBIFU-JDEAANbLafJisvTWSPJHbQBHArW9S" },
+            { nome: "Goma de mascar mini Mentos pure fresh ", categoria: "alimentos", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3280cb64c778472f85088c277db172bb/2.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAT23TNzatwqhU-1IE2nm5_rYb5oJWHHslh2QJEkvSQiMJrwg8V5ghVFIa4UytxrIGm2vA9tVYirMY0V4xlr5eKwBux6bJWVd8-4dD4vMrkSI=" },
+            { nome: "Mentos peppermint 30 unidades", categoria: "alimentos", preco: "6.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/4feffe265f0907d3d38314b68ed21674/Design_sem_nome__4_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAi5feefKxZvJJM4DhRA4-QBr7G8yf9dJtba1jUEVkyo79q_V4Y5D0xQdunWbD-8quTIvIthvDgEnffoz6_DEu6NSuTPKIHMkDEY_86xSA1_13BWatAMvysK0KGPpBwF9n" },
+            { nome: "Mentos orangemint 30 unidades", categoria: "alimentos", preco: "6.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1fd75854342551122f8e257ebc62c355/images__1_.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA_oVH_maiBHFXrqXTyFTT1LoOQM8c0df9t8eaVau0TE8jZr4fPw1zprzDjaY2lVqZEJx7Gtt6bhgsEwWTre9SdXcXCUHvBKGb2G3bekBbv9RN8JGicLSiPsMvMlx1GkWV" },
+            { nome: "Nucita caixa", categoria: "alimentos", preco: "15,69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7bea0cc98bf6a095a2b6ca9abc71936e/Nucita_caixa.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIALRL1eTN9MS9VJcNYGIdYDZVpcXU7axKiDkNw0LiwQ074WdOnemjApfMRJnSH6NtZ_myYQuV0l35lrLpBmnPcA5uwSchkWnEhEltCimMri6_L9zmsN3394bqVIKv5PqWg" },
+            { nome: "Nutella 150g", categoria: "alimentos", preco: "12,69", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0f5e3301b97432c8852aa20f6918ed98/Nutella_150g.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAiE7yH4mQ2XpKgumjlTanvRwAmiLnlHzUgg6MUEOP1FfIuCl5wGjdyfw4B5iseBYVt93pQmoqr-wVNL0PL7LHtU4KJvO28cCN4x2ATAf2aHv7pqb_BLR6xl-0aMSWfIIm" },
+            { nome: "Nutella 350g", categoria: "alimentos", preco: "25,99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/20eb35d1bf67bcde334291b20fd39b93/Nutella_350g.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIALAEbZLz9VRBVquivE2vhq8ioKElhtUGpzfeRX7iicEXugphQvYgUOGiT1eLIu6VsTf_AMjtfa65m3K-pQnBkxSln1nZxIxc2QMmmSKGhhJOjtGm2oQqSwZ6o-4z4Evik" },
+            { nome: "Ouro branco pacote", categoria: "alimentos", preco: "57,39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/58352497000fc63f10a3748650174435/images__3_.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAVFgMelQpIOFgzTCmZZBmU7iMBCoxWXC_tlUUg3XKHiOAFa1B9Xo7s8gHHiNn85Msyct43mhXbsKvP1C5XTqeel3nugWwZNXJl3BEtocqkL2yOOjS3MOcOT1FqA3jcCKw" },
+            { nome: "Pirulito cherry pop black cer", categoria: "alimentos", preco: "14,95", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/262b6478e22a9c1e4c359c89c3c0b3d5/Pirulito_cherry_pop_black_cer.jfif?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAm4Fq8t8yIfqSwHPNA6O99YXZ-N7Ud1o-sVmZg_9v-Zt7G_GR4JD6CIVXVPSXlj2r7akMfYYc9z93fEhp3Q1vVcY9sGImCciY5rUowdwmcRgQcIY1qAD-esK-eiNtMviHiRkeSQ69iJpzlCQGS8e4Jg==" },
+            { nome: "Pirulito megalítico pinta língua", categoria: "alimentos", preco: "16,59", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/fb648209582a4000c09ebc1b34012dff/Pirulito_megal_tico_pinta_l_ngua.webp?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA7gLCm_Y-niZUvA8OlsCSLqt_lYj8KCGTnVFeYGCC6I8q6_ukZ2gy3ez0tCB6Yd5XRn3MSuhgIOrdd85Z-gJsFbIvcoA6mi9X66tJPxOrVAAcmNg7sIunz8kRLQz4fEKdbhKZWTLYNCBXsuODaJbb4Q==" },
+            { nome: "Pirulito pop twist 2 em 1/ 700g", categoria: "alimentos", preco: "16,19", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/9cb828bf969c22641a1c3b8e92c90a1b/Pirulito_pop_twist.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAMEbImOBotp3HpBCs8S-cMIz2jNfvwxJ96K0eynkcVB11TT3xpakIab_lzvUHklelUhwJkYEQ9U6hZV-VGbY4FsTBDeqP7QvqAAbNPPTJLTj1xR7p-LFfy369tyfd884y" },
+            { nome: "Sonho de valsa", categoria: "alimentos", preco: "54,99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/9bd11f7c4b2b7a39275096ba90a6db4b/Sonho_de_valsa.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA0oXJHwqQnbaDEGp4ZulWfTepmSmxtDYvMFFansCQ1Tn6LXWeXDlBOxsvIxdHIMFFB0xBkJLjehwPG5J-27_NXW6tFRVSiOdBpESwyDSJ42Sxohh6dK71ZM2ot0CYKHho" },
+            { nome: "Trident caixa", categoria: "alimentos", preco: "41,49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cc4e0d11c2cdaab9601805c6d4995edf/Trident_caixa.jpg?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA4Ijxg6_hvRF19XjGZuqrWKKFlc9bwkZQuTAkFuEPmlmMsqpL_hgj4SVHUm5iNg0yOOjwFi-AptFW1s8Nn0c8AunC-HRq99Ul6IFM_05pnU6dlPRXN0unwRFKBzUJ01mm" },
+            { nome: "Feijão carioca amaresco 1Kg", categoria: "alimentos", preco: "7,99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e17d057843e3f4f984288375ff22ffaa/Design_sem_nome__5_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAwaTB9F1_5pdJBFturHWFc6mQ9uFDcOaHfXBCEw_H2Eh_iiG7GQN9SM7ge5kG9T_ZCD1UoRpXvYAYm-VA_XGe8Dd5iC5ZSV9IJiqfpClyswKiROtYNY2jazpi16JIRP8x" },
+            { nome: "Feijão de corda amaresco 1Kg", categoria: "alimentos", preco: "6,99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e060d6b77ed2cb0ecc5e3216da78bf92/Design_sem_nome__6_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAgxjC0zVPstL_ZThFPcO-_3oeqQk_U0OdiwLagIKRIXxTKPUKhtuwjarqn9DnjGkOJ3aDmgRr8ndUyia4MYqYPE27K2VYjuS_QUKkLaxoX0CGPAurtuvnaf4YiNeVIKzO" },
+            { nome: "Feijão preto amaresco 1Kg", categoria: "alimentos", preco: "9,79", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f790434b37df7262247fd33e6162231b/Design_sem_nome__7_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAMeq4b45q7Ri-CBeeLshG5hT26-yAzzHhMAJB-PrP48or73j6hhulFou4J4Ci0pTOUXdcLVPoiLPRHOCu7Jp7Qpubd1-ZesBGeHFH1VZaOCZF0V0MvhP6KvIUVP4sdh5G" },
+            { nome: "Feijão de corda Pinheiro 1Kg", categoria: "alimentos", preco: "7,19", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/431c48ee93bc4d06581a035c75ad3624/Design_sem_nome__8_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA3Lfe1Wj8ZZsaVZl19Goou8VRykosegS9w3BICIj5tuuMN3WGbjQbnsauloiWkRsRgu6LgtKGNEIb6gAuMaA3qO2mFOYy5X8yPvsMgYZ-MMIJIbo5iPqqXNCG386VtIdD" },
+            { nome: "Farinha branca pinheiro", categoria: "alimentos", preco: "3.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/6c0e95c781f9e44289d57791b61ea0e3/Design_sem_nome__9_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIACrmiv1FJq3dZQACGJ7WUhxePu_R2ZQVSrHSvJ1KpB_sDATKWUKbUGVHT_HoPcjgGrbsZh1FsvAlkrfPMD_WCIXK1U3VOCKdUVN--YI75SOb6nlwgQnVPYebaJMCr9wxt" },
+            { nome: "Farinha amarela pinheiro", categoria: "alimentos", preco: "3.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/44f5670a673f623a70b0b25ad0e16653/Design_sem_nome__10_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAl0yvTKoeRpILzZYw3xLWGvGZgk_c-F0tVPRavAxrBAr47KCprAAnzy5GAcEGaC15H8N0jaGSxXWBxDzsk_TDVh_oxzlNqh_a65guABkKTF4_kujtOmggp08jKu2tdH68" },
+            { nome: "Farinha amaresco de mandioca especial do pará (macacheira) ", categoria: "alimentos", preco: "10.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/970b8adaf3bcffeca49897efd12f94f2/Design_sem_nome__13_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAnN715Wn4ruM7sZnEQZL7V6sh1Ri3coz9xvmtmV-HKrMSyBNSBvE0yBAmCPsYEPTwZU4_MFlAMa1DZplbqcKX1eS8Go1lEnNiL2u_p7URMU37OkkLE018iJuqwRTJ8FY1" },
+            { nome: "Farinha Humaitá amarela ", categoria: "alimentos", preco: "4.80", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/8633c2e5beef2c9bbb64bedbedec428b/Design_sem_nome__12_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAALX5VSTOuLlXrF51BZPX_iCpRBgHe8z80Ws78MltTE4br3wr5tbOmyOCLExXCcEVqWDkYPSorQSB9C-Z_AEmBn-BTXiNeNkOmx5N4ZcQOD2-TCm_ALLrepsVgLlmUr16" },
+            { nome: "Farinha Humaitá branca ", categoria: "alimentos", preco: "4.80", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/d9f0533a314dd6fd3d33ff5089222a86/Design_sem_nome__11_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAOqBmDQoBF0ljcIuYeAT5BJRMOR04GrE2FYDdTlVTVawbUKxq7AaNJheg_dKuZGIs6r0FI5mEQwAv52P2IbSTOzsIZmlg6OVRNwLFfmTS0jgx5IkGYSZlMWA8zwwSVdNZ" },
+            { nome: "Farofa pronta sabor baiana ", categoria: "alimentos", preco: "4.75", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/2430f0438681014b3e955ce865e4ab11/Design_sem_nome__14_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAuQZJENylop0qYOeLz1xlj2bRrUZQfk_jHvEaKLw1XOX14n16UtwgAciPZ6M-G71zpPzHqaQDpplA00qD69nSCqaUHxKZkh2_FrHqVW5XyyXbNC6X_VcVmQh7GVitrwZa" },
+
+        ];
+
+        let carrinho = [];
+
+        function searchProduct() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosEncontrados = produtos.filter(produto => produto.nome.toLowerCase().includes(input));
+            displayProducts(produtosEncontrados);
+        }
+
+        function filterByCategory(category) {
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosFiltrados = produtos.filter(produto => produto.categoria === category);
+            displayProducts(produtosFiltrados);
+        }
+
+        function displayProducts(produtosArray) {
+            const results = document.getElementById('searchResults');
+            if (produtosArray.length > 0) {
+                produtosArray.forEach(produto => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+                    productDiv.innerHTML = `
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                        <h2>${produto.nome}</h2>
+                       
+                        <p>Preço: R$ ${parseFloat(produto.preco).toFixed(2)}</p>
+                        <button onclick="addToCart('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+                    `;
+                    results.appendChild(productDiv);
+                });
+            } else {
+                results.innerHTML = '<p>Nenhum produto encontrado.</p>';
+            }
+        }
+
+        function addToCart(nome, preco) {
+            carrinho.push({ nome, preco: parseFloat(preco) });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            let total = 0;
+            carrinho.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>`;
+                cartItems.appendChild(li);
+                total += item.preco;
+            });
+            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            carrinho.splice(index, 1);
+            updateCart();
+        }
+
+        function checkout() {
+            const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            if (total > 10) {
+                let message = 'Olá, gostaria de finalizar a compra dos seguintes itens:\n\n';
+                carrinho.forEach(item => {
+                    message += `- ${item.nome}: R$ ${item.preco.toFixed(2)}\n`;
+                });
+                message += `\nTotal: R$ ${total.toFixed(2)}`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappLink = `https://wa.me/SEU_NUMERO_DE_WHATSAPP?text=${encodedMessage}`;
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert('O total da compra deve ser acima de R$ 10,00 para finalizar a compra.');
+            }
+        }
+
+        window.onload = () => displayProducts(produtos);
+    </script>
+
+</body>
+</html>

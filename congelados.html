@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercadinho Edson</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Cabeçalho e menu */
+        header {
+            background-image: url("https://img.freepik.com/vetores-premium/fundo-abstrato-laranja_42634-49.jpg");
+            padding: 20px;
+            color: black;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+         
+            
+        }
+
+        .navbar a {
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF5A00;
+        }
+
+        /* Barra de pesquisa */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FF5A00;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Estilo de categorias */
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .category {
+            margin: 0 10px;
+            color: #FF5A00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .category:hover {
+            text-decoration: underline;
+        }
+
+        /* Resultados de pesquisa e produtos */
+        #searchResults {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .product {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product button {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Carrinho */
+        #cart {
+            margin: 20px auto;
+            width: 80%;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #cart h2 {
+            color: #FF5A00;
+            margin-bottom: 10px;
+        }
+
+        #cart button {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .remove-btn {
+            background-color: #FF5A00;
+            color: #fff;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img   style=" float: left ; justify-content: space-between; padding-bottom: 10px; padding-top: 0% ; " width="200" height="72" src="https://u1.padletusercontent.com/uploads/padlet-uploads/933833254/3809e7f1eb861e488043ad0215293231/MERCADINHO_EDSON.png?token=_siI4-0qIuaG7Br3OeW4tDSftcnfUhFg1A5NweFgucHLE-JfsKvk46i5NX8FrTZqT05DxqHPcDXmNGvc1RffU_rTEX4MuACAXYIHC6FcdrFtLy6sk_5zkwVIaCSsvWWFqUNsWfM1JO4w4ReNimKmueeiaTwB2soR-GRwvLAXCirqMvNn_2UNbT7ZMWhiiu2c_sZI_4bjOjRzESibvh6vId071urW4ogxcc2obOOIEtCSAlHXY2Yma9A_t3y8u2e6">
+        <h1 style="margin-right: 10%;" >O melhor preço você encontra aqui!</h1>
+        <p style="margin-right: 10%;" >Bem-vindo à nossa loja online, aproveite nossas ofertas!</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="index.html">Início</a>
+        <a href="congelados.html">Frios</a>
+     
+        <a href="higiene.html">Higiene</a>
+        <a href="alimentos.html">Alimentos</a>
+      
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar produto...">
+        <button onclick="searchProduct()">Pesquisar</button>
+    </div>
+
+   
+
+    <div id="searchResults"></div>
+
+    <div id="cart">
+        <h2>Carrinho de Compras</h2>
+        <ul id="cartItems"></ul>
+        <p><strong>Total:</strong> <span id="totalPrice">R$ 0,00</span></p>
+        <button onclick="checkout()">Finalizar Compra no WhatsApp</button>
+    </div>
+
+    <script>
+        const produtos = [
+            { nome: "Bisteca suina ", categoria: "congelados", preco: "25.74", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/bd0f3f8adec8df7484df9d40682412b2/Design_sem_nome__42_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAwOPkmph3QTPByt1jb9tfnojbLDJmPJOu0JmOq0gXaebkhTRd9l9RbGgjAbLW5OWT_GxuWVG4F5DtQdJ8nNR-M5pM4-GdAwSNYiglEQsFGwpHP9Eim7vMcZjxTeWdAa-i" },
+            { nome: "Liguiça merci churrasco ", categoria: "congelados", preco: "15.40", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/ea138a7835402b144e248e1c4dc05b4d/Design_sem_nome__43_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ16WjNWa5GdT-3xcRo5tx9979iSiCujPG9s_vxNoZqnWgeQxLOxfgFDbos7A2hHwzkkjp0aNrO1CpKmY6OFfgFIgUXjrWsAteOEmUbQ5wuEDZ5TZdX5E4NWHiahfQTjuR55xf7vryHRuq3N89qHOFdI=" },
+            { nome: "Bacon a granel ", categoria: "congelados", preco: "9.42", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/b43a73cfadf31ec60aec2f3c93814864/Design_sem_nome__44_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ4O9i2whIkTLs9jrA5u2smqJL2_OFzHm1jbIxKUAfYc3tPW6CxhjmCQEtNluqgYTGMtGIomac1fPd3UjlnXuw3-nXn7LIKHKAzzyFFcFAnp_EQp4c0GcRnvQ7MxeC-NdT5lSsM6qsJOJydeVhh0iekw=" },
+            { nome: "Frango sadia inteiro sem miudos temperado ", categoria: "congelados", preco: "28.16", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/34c4c204a55864a016422f314cd5e9d6/Design_sem_nome__45_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ8CwY-aqb8R3uPZF9dL14CvyWRvzGFTZ-jmJrCtSc_L0dIzjysfxaXgyVtONxXIEll2ly0qpSaA8F281gvZiSq6jxD5vVZf0GMgK2hjDU9ZXe3ZiV9_vPkIzIyQFmCxqiY9VQHSoxmNujFkt2gq7DPw=" },
+            { nome: "coca 2l ", categoria: "congelados", preco: "9.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c02f2b296e2416eb680e20565f8f5940/Design_sem_nome__2_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAgPV927a13MEtQbIGkxmYwlKRQMJZRQpsuK00QzpWTR1I0AYb8wCTBEm3ANKr2ZTJGFFIvXHWSBfljPvp09Qjcq1CRjusnvAM5gAEifvWM9jUXxRHnbnrB5i0NvuMBmhH" },
+            { nome: "guaraná 2l", categoria: "congelados", preco: " ", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/c1c2bd713711f20827c7fc1c96d50cd1/Design_sem_nome__13_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAi8HnL1axlTcSmeKv0xUGS4860r2umJ2Ib0x50J4HzuFdOyhIMC2sZ2GdY_scOfK4c-IbLHkKQgKNVJ_JSh9OTrD5BM7yo6IctMlvz75m6rGmcPcYWCjqAZE-R1YQcGJs" },
+            { nome: "cajuina 1l ", categoria: "congelados", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/847219be6b39588b618fececdab8dd77/Design_sem_nome__12_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA0ynMy_WM4FvVNU-we2pb8T4xtJhJiyLoBx0517SphkDBM5_xZnlavvJtY0JKubuz9mzuRf63vSF9Zg4ONSAaEZozotAvScT0RVYjY5MJ7SgGPJQQtl81cpgotMz02bDX" },
+            { nome: "Mortandela defumada ", categoria: "congelados", preco: "7.51", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/515bf0f2d7afa8d8c2d117b4d09df16a/Design_sem_nome__15_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAOthq24Gabp_-OLCxzq1eBFxJc8hM8TTHcEvdjZGEP_CGe6oazGKhDJ2lS0wZAA5lkTWs3ZF0w0DAi4Ydyq8Lfs0wx8hgangcPG7FrCujN_fogpHTP_hxCaNuhxrWkXcq" },
+            { nome: "cajuina 2l", categoria: "congelados", preco: "9.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/dddcb57799cc67177080c19f35983bb3/Design_sem_nome__18_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA5msqyJEMeucLd5BRhhyDK5tT7gpWqRIIgkQldKoxQcy8geyrgS2QXW6jH-8gOFhrr5IWqYSIUNGVKQLmzxEPQPXO6DcNmNJ1sS7nu9YPTfwMJhlcicmV5tSE5IiBzt2e" },
+            { nome: "Queijo redondo lapinha ", categoria: "congelados", preco: "35.41", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/cc6defe763dd5e9df74fc32f69502018/Design_sem_nome__5_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ02XtW33Juv2UXMz6USMFQ2yQppxZd54uSQs5L5hvpBNl5_jhpvdJCLja7vVlpLEG1mcUqA26yBO8xWGvPyymuL33amVHXY4HzQ9rhl8P0ZRFwWApyWD6q9470KBKj1HiC1MD40e9dN1YUgJMekur1c=" },
+            { nome: "Queijo quadrado pinheiro", categoria: "congelados", preco: " 19.00", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3619218573c15054ac8225a48c023a05/Design_sem_nome__6_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAssJmlYHQOLaqiii2Yv1AGmekR9TMirrysjTeZ56Fk50zsOsEC60fSkh3Zfv2rI0ExucuyOmbMYvdZZBe_FLgim5jclyHKeikcrdNVSEgcVodyTMrOpZl9S9NWmrQZzha" },
+            { nome: "Pepis 200ml ", categoria: "congelados", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/dd66b4db44e1526ec0cd15d0f3132d73/Design_sem_nome__9_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAOVIyJBH9LCBXOfL5N5ADDkc0ihPaGDjiuHS_ufe644Bw3I3imEdVW9JEf3k3sLA-PBCNLlSKj-YaWrDQM1srJT8IXgPaiQ5M9Sg9DkjaJYBjUGSmnAJfF4aPLZS3qhe-" },
+            { nome: "Sukita laranja 200ml", categoria: "congelados", preco: "1.70", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/84388a621127cc88dd80af7589d6d22a/Design_sem_nome__19_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA0qNMMjX15Lc3q2fxUeWM9qloR77HulXxkTA1YFIts4Wk_8wQMZoYQRpxD7w8P_EfX4pnhBlIS3uITCXUMmvyyDD-I3moy0vJCzmQpWkJcradZ7ZkRV2Gi5v1-r9QMhJc" },
+            { nome: "Guaraná 200ml ", categoria: "congelados", preco: " 1.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7eb3e5085bfd1b2cd921aa6e3a6506cb/Design_sem_nome__7_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAperthlvxz-Myjxa4DZHMkOGSdgdUdr7rYJDpqn6uc7tcZczcfmI38LmtBsEMkMlHZ9KPFXdRkzhHt4Hz05KbrLHAJ4u5C3OaET8GXidIVVNsg13uKZw1tDRaLqNE8jco" },
+            { nome: "Cajuina 200ml", categoria: "congelados", preco: "1.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/e03793b5e281b912952f810bc7e72173/Design_sem_nome__10_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAxfEW5f8kKpqk_8WbX16n6Cwo4gWea_XCgA0wG2qqKdW5kyex66Rwdxu3wp4Eb_2cBvczuey1x8ihhtB8wb1JCiztG33tq4Y7y9K8fyFYJTSTSqpShNScXFTPTGG6zY7O" },
+            { nome: "Coca lata 350ml ", categoria: "congelados", preco: "5.00", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/74bfe62c8e167db6f473e15529649c44/Design_sem_nome__14_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAx0BF1mL0_HSo_Ik7m1NKkiYFlTtnfBDFglyY4rFIM2jOdZDTGmqNCHySS3sIb5ywW01o1UJMEAUlu3VYzF0YnQiOd9T_ywNK2GYEdoxv3_8exXrmbde3vAhxfTcEEzP4" },
+            { nome: "Sabia hambúrguer peão liq 56 g", categoria: "congelados", preco: "1.35", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/1cbc42e4d7bc2477e41b964483a7131a/Design_sem_nome__47_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ59m-onEv0pzsKUGuL_WvS5TBl7HG8M1P9SGZvCaRajzg76ipbAyVeValQnuuy5LuP6a0fx-4TKBwK2Sj4_8qtUv-hvjCwGC7qniw5uDkyiQFnvKp_5xo82ZUWQbA1q2dgAEsN0ZXsgntyzQ3G5xLQM=" },
+            { nome: "Macaxeira pré cozida ", categoria: "congelados", preco: "6.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/af9b5f211cfced3127cbfdeab883d69e/Design_sem_nome__46_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ2_zla4dHR139pA3GtRbCwzN9y-q7XDjrmfZLC0TLLcvKcUOFBXNgUpwhABKHMIaLgaBeu3JU4m-9p7RPcHhuWaojdGv854IJGPz8Es-qC4A5HZ7tE7WvkVEhlqI0JnluPP88ppPbD1V1D6h7jl6GD0=" },
+            { nome: "Vita gula mini pizza 350 g", categoria: "congelados", preco: "8.45", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/0788bfecbffc562aab915167eea94570/Design_sem_nome__53_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ7wwHA5oMixOf0CONirsRdofH4luS7lYfnU0dU-MewOOwCqhX_S3jEqq9mVlA4yqdLIiFOjxH8p_pHSi8d5qYEFPEwVTyXCnlolOLWMmlKVsPpEjFGpyDfuojBjk8xAcPFEuDNSGzcoxaKDbO_JoWuM=" },
+            { nome: "Lasanha bolonhesa 600 g", categoria: "congelados", preco: "21.00", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/3199b089570abfc76ed79dddf46edb32/Design_sem_nome__51_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ9Exm5EvVINxfeeNT_NNHmmgDPaHUWHHV91sgXvM03waqF_VxVxNaWAkKyyymZAZqZ6h8YV7Ef-83AgF06U1hexPQkJLwTWk8Q4rVjC_btvOX5F2y44yQbC1-DhfAvQbISdnL7XgYjtSImFqp4F1qNg=" },
+            { nome: "Salsicha hot dog 500 g", categoria: "congelados", preco: "6.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f72cdd784a031ec85322a6abaa49dbe6/Design_sem_nome__52_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ2ZoS-KjwSQOFAFneX_4AnOT8ivx3wzezSwoFWIYza1y7Z6-J1awLVOqZVHekUdGk85dOYUm-2-Jlphvdoi0hOObBcmMWI0MEmklJb-KBJ2knnnFvnMCgOWb9cI1F7KEazQ7rJplpQFgCbalI13EunU=" },
+            { nome: "Pão de queijo 400 g", categoria: "congelados", preco: "8.55", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/96b6795b594dd17ee45e3890c1e56625/Design_sem_nome__50_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ6j0nfxG_Ux8rTgBsZhxiPVb12W4sak_3yJII5i6BZxZfydVvLLBRFBP5OhL09rLmhinMW6meJT86_rGVlUAUb6XlkkWFmvEdyKe2qiGpgbYlJqJxod0AvHr4CMfc1iXbXHz1IiFiSBuj8Qn1OS4HeU=" },
+            { nome: "Coxinha pocket 220 g", categoria: "congelados", preco: "10.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/13add1e3660cfef8325a4261b71b82b2/Design_sem_nome__48_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ95xN5ma_Ygvl5iaiL-WWtM0f6MGl91LUK9JeuaKHbH4uWac2qoJczbsB20QDJllNsCsDHGs7Cmqrrvmg8rrzZz6xDY8MpT7TPPpgq_0CZyv4Xsp5i-wI7X1cBHGxX78PnWOSGHaJoAh6Z1X-dJhBlE=" },
+            { nome: "Churros doce de leite 300 g ", categoria: "congelados", preco: "10.99", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/7da441e62a339e7fb20f40b63bd31e2a/Design_sem_nome__49_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ0qo0tnnT8PzEbNizHoRmDifpNsnxRnNVoS1y3OnRFYKsHIEF0rOUDgjiudb9L2ucZLeVpIerbYsYCB_aqO6gCG_5k-ZdRv9pgVsF1-UQDfzKWyatmkPq7nvwhgw5VxImpdC70WvlKSVGhaxfWkGd1k=" },
+            { nome: "Cortes congelados de frango sobrecoxa 1 kg regina", categoria: "congelados", preco: "13.49", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/bf80547f48c403b3ceb09e2ac54916d3/Design_sem_nome__40_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZygel06Rm2WrDucoft429V2RzeXMWczwnBkIEXlUnV3EOZRIXtDJdQCoglkLv-qbs0-M7E0J2qtLtn3Zbmc5SMgZGwyTwuzyLBiiVfcXR8tEf5wnZTzTKeEzWQoHxZZqJ86iF4rhn7Hr_MfBrMCEnuU=" },
+            { nome: "Filé de peito perdigão 1 kg ", categoria: "congelados", preco: "", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/eee76d4c2df9ec5bb867e268ed808416/Design_sem_nome__1_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ04s9wvxqtClkaC5jHcdV1Z9Ti83Ge4Ib6GnwqvBnV13DMd4GIJ8BV4ejBnS2WYpcz8YXR8BmSJg0HFOTP1q9RK9D0zR2SSyhnaz8oaEXjYxn8IEUmE1_G0UUMHT2mhYwF86i0RAz-J_Pk7XUCbp0rQ=" },
+            { nome: "batata aifryer ", categoria: "congelados", preco: "18.29", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/f94315269c78ab89e62d340633182148/Design_sem_nome__17_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIA2Bq0wWHN4YnfvFc-79tgBTigYXl7DvBzDkWSDZTpIjI2UYC0l7nD9fXm2iVv_-uUSR5BPFgx-gfjtjE9hk-K9LrhJyvW9Br6ZdYsuBP11wv-ZPx55bbuN8_GWDyyLpYh" },
+            { nome: "Batata palito 400 g ", categoria: "congelados", preco: "12.39", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/fb4d256a62202c539fe3334c3d0ec6f3/Design_sem_nome__41_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ-K_0aiMasJW9Fm9Ke4Z5GUXgDNrXNnFVuUmB364wE44MKO7m5ik6E9YX833whah-IH4lbWb9iYh9_uPCaEKpiVLtXuloN-LskoU3CtvmVvItFTjkBnbkCJ6Pt87XCiDx4fa6uzmYxUUWYid30FXmww=" },
+            { nome: "lazana perdigão de frango com toque de bacon ", categoria: "congelados", preco: "16.89", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/22bb3a1cbadcf9bdbcf1f9251d754eb0/Design_sem_nome__39_.png?expiry_token=5WaHZRdGG3LkUVQGy3SZ-zdRtq89aJeottSBaF_Hii8EGDVBG-vnLc5ZfL_2GiKosWMOCkHArMcc8LorETHcZ37MqC7JIJKU7NA9Y71bGWTbrWW6mSPQWA6cP7QE5__iMhgkZp63j-VzVg_Eh9ynnc1ygugTJ7meJIDdTTWn9MP7HAjPL4jE9JNw0XjEziV1Vk-kQEvDO1XZTFqdOt_5C5neeVe3B0IEFiN6RVMvDoA=" },
+            { nome: "Coxinhas das asas drumette 1 kg ", categoria: "congelados", preco: "15.85", imagem: "https://u1.padletusercontent.com/uploads/padlet-uploads/2501839692/5a9282db75d55c90b11f3ea9ce1c1a3e/Design_sem_nome__16_.png?token=0Mdy3G6piCoaU0M0y2_EYZkD1qtxwDRJ_XXd5beKegiF6NfwjcPsR2ZfhahgE9f-Dbe7RFLtXJhm-C6K5sUfPlEvfQ2qYXzf66a1_iAGXh7-RMYGn2c4F-Whb4PF_fIAhrN0jjHcOuYe-VwQe3ShRwBHNm2XmB84mT5JQHToB_PHNJx1K1vkJW7fJvLOtK8RNYtolH_gV65J7UmEY86xPurnktLw714tA164fCVn8PcLWnX5fymWLwL4AcRW7Fji" },
+
+
+
+            
+        
+        ];
+
+        let carrinho = [];
+
+        function searchProduct() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosEncontrados = produtos.filter(produto => produto.nome.toLowerCase().includes(input));
+            displayProducts(produtosEncontrados);
+        }
+
+        function filterByCategory(category) {
+            const results = document.getElementById('searchResults');
+            results.innerHTML = '';
+
+            const produtosFiltrados = produtos.filter(produto => produto.categoria === category);
+            displayProducts(produtosFiltrados);
+        }
+
+        function displayProducts(produtosArray) {
+            const results = document.getElementById('searchResults');
+            if (produtosArray.length > 0) {
+                produtosArray.forEach(produto => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+                    productDiv.innerHTML = `
+                        <img src="${produto.imagem}" alt="${produto.nome}">
+                        <h2>${produto.nome}</h2>
+                       
+                        <p>Preço: R$ ${parseFloat(produto.preco).toFixed(2)}</p>
+                        <button onclick="addToCart('${produto.nome}', ${produto.preco})">Adicionar ao Carrinho</button>
+                    `;
+                    results.appendChild(productDiv);
+                });
+            } else {
+                results.innerHTML = '<p>Nenhum produto encontrado.</p>';
+            }
+        }
+
+        function addToCart(nome, preco) {
+            carrinho.push({ nome, preco: parseFloat(preco) });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = '';
+            let total = 0;
+            carrinho.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button class="remove-btn" onclick="removeFromCart(${index})">Remover</button>`;
+                cartItems.appendChild(li);
+                total += item.preco;
+            });
+            document.getElementById('totalPrice').textContent = `R$ ${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            carrinho.splice(index, 1);
+            updateCart();
+        }
+
+        function checkout() {
+            const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            if (total > 10) {
+                let message = 'Olá, gostaria de finalizar a compra dos seguintes itens:\n\n';
+                carrinho.forEach(item => {
+                    message += `- ${item.nome}: R$ ${item.preco.toFixed(2)}\n`;
+                });
+                message += `\nTotal: R$ ${total.toFixed(2)}`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappLink = `https://wa.me/SEU_NUMERO_DE_WHATSAPP?text=${encodedMessage}`;
+                window.open(whatsappLink, '_blank');
+            } else {
+                alert('O total da compra deve ser acima de R$ 10,00 para finalizar a compra.');
+            }
+        }
+
+        window.onload = () => displayProducts(produtos);
+    </script>
+
+</body>
+</html>
